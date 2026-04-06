@@ -40,7 +40,7 @@ export default function WallEvents() {
           textTransform: 'uppercase',
           textAlign: 'center',
           lineHeight: 1.3,
-          maxWidth: '180px',
+          maxWidth: '300px',
         }}>
           {t.sections['co-kedy-kde']}
         </div>

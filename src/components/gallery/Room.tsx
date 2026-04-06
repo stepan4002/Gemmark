@@ -407,6 +407,21 @@ export default function Room() {
         <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
+      {/* Front-left corner (left wall meets front opening) */}
+      <mesh position={[-halfW, WALL_H / 2, halfD]}>
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
+      {/* Left wall where it meets Wall A (left side of Wall A junction) */}
+      <mesh position={[-halfW, WALL_H / 2, WALL_A_Z]}>
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
+      {/* Left wall where it meets Wall B LEFT */}
+      <mesh position={[-halfW, WALL_H / 2, WALL_B_Z]}>
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
     </group>
   );
 }

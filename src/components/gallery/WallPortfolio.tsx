@@ -30,7 +30,7 @@ export default function WallPortfolio() {
     <group>
       {/* Section label — single line, near the front of the left wall */}
       <Html
-        position={[WALL_X + 0.12, WALL_HEIGHT * 0.92, START_Z - 1.5]}
+        position={[WALL_X + 0.12, WALL_HEIGHT * 0.92, START_Z - 4.0]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
