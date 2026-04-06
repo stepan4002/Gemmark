@@ -29,7 +29,7 @@ export const translations = {
     pripravujeme: 'Pripravujeme...',
 
     // Wall texts
-    tvorimeObrazGemera: 'Tvoríme obraz Gemera.',
+    tvorimeObrazGemera: 'Tvoríme obrazy Gemera',
 
     // Project detail page
     spatDoGalerie: '← Späť do galérie',
@@ -112,7 +112,7 @@ export const translations = {
     klikniPreViac: 'Kattints a további információkért',
     pripravujeme: 'Előkészítjük...',
 
-    tvorimeObrazGemera: 'Gömör képét alkotjuk.',
+    tvorimeObrazGemera: 'Gömör képeit alkotjuk',
 
     spatDoGalerie: '← Vissza a galériába',
     deliverables: 'Amit létrehoztunk',
@@ -193,7 +193,7 @@ export const translations = {
     klikniPreViac: 'Click for more information',
     pripravujeme: 'Coming soon...',
 
-    tvorimeObrazGemera: 'We shape the image of Gemer.',
+    tvorimeObrazGemera: 'We shape the images of Gemer',
 
     spatDoGalerie: '← Back to gallery',
     deliverables: 'What we created',

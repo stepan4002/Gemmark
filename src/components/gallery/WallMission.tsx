@@ -137,7 +137,7 @@ export default function WallMission() {
           letterSpacing={-0.02}
           raycast={() => null}
         >
-          {lastWord}.
+          {lastWord}
         </Text>
 
         {/* Click hint — rotation locked to parent */}
