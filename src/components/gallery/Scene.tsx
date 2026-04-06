@@ -177,14 +177,14 @@ function CameraController() {
         e.preventDefault();
         const tx = e.touches[0].clientX;
         const ty = e.touches[0].clientY;
-        const speed = 0.15 * (35 / zoomLevel.current);
+        const speed = 0.06 * (35 / zoomLevel.current);
         const dx = (tx - lastPointer.current.x) * speed;
         const dy = (ty - lastPointer.current.y) * speed;
         const vx = -(dx * 0.707 + dy * 0.707);
         const vz = dx * 0.707 - dy * 0.707;
         targetPanX.current += vx;
         targetPanZ.current += vz;
-        velocity.current = { x: vx * 1.5, z: vz * 1.5 }; // boost for fling
+        velocity.current = { x: vx * 1.2, z: vz * 1.2 };
         lastPointer.current = { x: tx, y: ty };
       }
     };
