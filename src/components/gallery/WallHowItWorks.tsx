@@ -90,14 +90,14 @@ export default function WallHowItWorks() {
         position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.52, FACE_Z_B_RIGHT + 0.1]}
         rotation={WALL_ROT}
         size={[6.0, 3.5]}
-        image="/images/branding/gemer-map.jpg"
+        image="/images/branding/roznava-map.png"
         label={t.sections['ako-sa-spojis']}
         panelData={{
           type: 'info',
           id: 'ako-sa-spojis',
           title: t.sections['ako-sa-spojis'],
           description: t.akoSaSNamiSpojisDesc,
-          image: '/images/branding/gemer-map.jpg',
+          image: '/images/branding/roznava-map.png',
         }}
       />
     </group>

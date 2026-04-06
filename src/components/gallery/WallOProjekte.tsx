@@ -100,7 +100,7 @@ export default function WallOProjekte() {
     <group>
       {/* ── RIGHT FACE (+X): "O Projekte" section label ─────────────────── */}
       <Html
-        position={[FACE_X, WALL_HEIGHT * 0.9, WALL_C_Z - 1.5]}
+        position={[FACE_X, WALL_HEIGHT * 0.9, WALL_C_Z]}
         rotation={ROT_RIGHT}
         transform
         style={{ pointerEvents: 'none' }}
