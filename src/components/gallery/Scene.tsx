@@ -46,9 +46,27 @@ function CameraController() {
     cam.updateProjectionMatrix();
   };
 
+  // Target positions — event handlers write here, useFrame interpolates toward them
+  const targetPanX = useRef(panX.current);
+  const targetPanZ = useRef(panZ.current);
+
   useFrame(() => {
     if (!initialized.current) {
       initialized.current = true;
+      targetPanX.current = panX.current;
+      targetPanZ.current = panZ.current;
+      applyCam();
+      return;
+    }
+
+    // Smooth interpolation toward target (makes touch fluid at 60fps)
+    const lerpFactor = 0.25; // higher = snappier, lower = smoother
+    const dx = targetPanX.current - panX.current;
+    const dz = targetPanZ.current - panZ.current;
+
+    if (Math.abs(dx) > 0.001 || Math.abs(dz) > 0.001) {
+      panX.current += dx * lerpFactor;
+      panZ.current += dz * lerpFactor;
       applyCam();
     }
 
@@ -58,11 +76,10 @@ function CameraController() {
       !animating.current &&
       (Math.abs(velocity.current.x) > 0.001 || Math.abs(velocity.current.z) > 0.001)
     ) {
-      panX.current += velocity.current.x;
-      panZ.current += velocity.current.z;
+      targetPanX.current += velocity.current.x;
+      targetPanZ.current += velocity.current.z;
       velocity.current.x *= 0.92;
       velocity.current.z *= 0.92;
-      applyCam();
     }
   });
 
@@ -114,13 +131,12 @@ function CameraController() {
       const vx = -(dx * 0.707 + dy * 0.707);
       const vz = dx * 0.707 - dy * 0.707;
 
-      panX.current += vx;
-      panZ.current += vz;
+      targetPanX.current += vx;
+      targetPanZ.current += vz;
 
       velocity.current = { x: vx, z: vz };
 
       lastPointer.current = { x: e.clientX, y: e.clientY };
-      applyCam();
     };
 
     const onUp = () => {
@@ -214,6 +230,8 @@ function CameraController() {
       if (t >= 1) {
         panX.current = tx;
         panZ.current = tz;
+        targetPanX.current = tx;
+        targetPanZ.current = tz;
         applyCam();
         animating.current = false;
         return;
@@ -221,6 +239,8 @@ function CameraController() {
       const e = 1 - Math.pow(1 - t, 3);
       panX.current = sx + (tx - sx) * e;
       panZ.current = sz + (tz - sz) * e;
+      targetPanX.current = panX.current;
+      targetPanZ.current = panZ.current;
       applyCam();
       requestAnimationFrame(tick);
     };
@@ -231,7 +251,7 @@ function CameraController() {
   useEffect(() => {
     if (!cameraTarget || animating.current) return;
     animating.current = true;
-    velocity.current = { x: 0, z: 0 }; // kill momentum on programmatic nav
+    velocity.current = { x: 0, z: 0 };
 
     const sx = panX.current;
     const sz = panZ.current;
@@ -244,6 +264,8 @@ function CameraController() {
       if (t >= 1) {
         panX.current = tx;
         panZ.current = tz;
+        targetPanX.current = tx;
+        targetPanZ.current = tz;
         applyCam();
         clearCameraTarget();
         animating.current = false;
@@ -252,6 +274,8 @@ function CameraController() {
       const e = 1 - Math.pow(1 - t, 3);
       panX.current = sx + (tx - sx) * e;
       panZ.current = sz + (tz - sz) * e;
+      targetPanX.current = panX.current;
+      targetPanZ.current = panZ.current;
       applyCam();
       requestAnimationFrame(tick);
     };
