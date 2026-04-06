@@ -34,13 +34,13 @@ export default function WallHowItWorks() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '180px',
+          maxWidth: '250px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-to-funguje']}
@@ -50,7 +50,7 @@ export default function WallHowItWorks() {
       <WideFrame
         position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.52, FACE_Z_B + 0.1]}
         rotation={WALL_ROT}
-        size={[4.5, 3.5]}
+        size={[5.0, 3.0]}
         image="/images/services/consultation.jpg"
         label={t.sections['ako-to-funguje']}
         onClickOverride={() =>
@@ -73,13 +73,13 @@ export default function WallHowItWorks() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '180px',
+          maxWidth: '250px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-sa-spojis']}
@@ -90,14 +90,14 @@ export default function WallHowItWorks() {
         position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.52, FACE_Z_B_RIGHT + 0.1]}
         rotation={WALL_ROT}
         size={[6.0, 3.5]}
-        image="/images/branding/gemmark-icon.jpg"
+        image="/images/branding/gemer-map.jpg"
         label={t.sections['ako-sa-spojis']}
         panelData={{
           type: 'info',
           id: 'ako-sa-spojis',
           title: t.sections['ako-sa-spojis'],
           description: t.akoSaSNamiSpojisDesc,
-          image: '/images/branding/gemmark-icon.jpg',
+          image: '/images/branding/gemer-map.jpg',
         }}
       />
     </group>

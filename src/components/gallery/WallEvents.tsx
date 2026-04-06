@@ -33,10 +33,10 @@ export default function WallEvents() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
           textAlign: 'center',
           lineHeight: 1.3,

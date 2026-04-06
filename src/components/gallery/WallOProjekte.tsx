@@ -80,7 +80,7 @@ function BobbingIcon() {
       <Html center position={[0, 0, 0.04]} style={{ pointerEvents: 'none' }}>
         <span style={{
           color: '#fff',
-          fontSize: '14px',
+          fontSize: '22px',
           fontWeight: '700',
           fontFamily: 'Arial, sans-serif',
           userSelect: 'none',
@@ -107,13 +107,13 @@ export default function WallOProjekte() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '180px',
+          maxWidth: '200px',
           lineHeight: 1.3,
         }}>
           {t.sections['o-projekte']}

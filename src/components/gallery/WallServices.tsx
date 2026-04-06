@@ -142,11 +142,10 @@ export default function WallServices() {
       >
         <span style={{
           color: '#222',
-          fontSize: '20px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
-          whiteSpace: 'nowrap',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
           maxWidth: '400px',
         }}>

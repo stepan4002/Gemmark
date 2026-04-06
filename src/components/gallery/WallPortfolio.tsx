@@ -37,13 +37,13 @@ export default function WallPortfolio() {
       >
         <span style={{
           color: '#222',
-          fontSize: '22px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '1px',
+          letterSpacing: '2px',
           whiteSpace: 'nowrap',
           textTransform: 'uppercase',
-          maxWidth: '400px',
+          maxWidth: '500px',
         }}>
           {t.sections['portfolio']}
         </span>
