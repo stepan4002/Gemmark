@@ -13,8 +13,8 @@ const T = 0.35;
 const FACE_Z = WALL_A_Z + T / 2 + 0.05;
 const WALL_ROT: [number, number, number] = [0, 0, 0];
 
-// Two frames side by side, centred on Wall A
-const FRAME_SPACING = 4.0;
+// Two frames side by side, centred on Wall A — smaller with more space between
+const FRAME_SPACING = 5.5;
 const LEFT_X = DIVIDER_X - FRAME_SPACING / 2;
 const RIGHT_X = DIVIDER_X + FRAME_SPACING / 2;
 const FRAME_Y = WALL_HEIGHT * 0.52;
@@ -158,7 +158,7 @@ export default function WallServices() {
       <WideFrame
         position={[LEFT_X, FRAME_Y, FACE_Z + 0.05]}
         rotation={WALL_ROT}
-        size={[4.5, 4.0]}
+        size={[3.5, 3.0]}
         image="/images/services/graphic-design.jpg"
         label={individualLabel}
         onClickOverride={() =>
@@ -176,7 +176,7 @@ export default function WallServices() {
       <WideFrame
         position={[RIGHT_X, FRAME_Y, FACE_Z + 0.05]}
         rotation={WALL_ROT}
-        size={[4.5, 4.0]}
+        size={[3.5, 3.0]}
         image="/images/services/strategy.jpg"
         label={packagesLabel}
         onClickOverride={() =>

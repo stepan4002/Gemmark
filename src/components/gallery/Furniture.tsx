@@ -126,31 +126,29 @@ function Plant({ position }: { position: [number, number, number] }) {
 //
 // Plant in the back-left corner.
 export default function Furniture() {
-  // Furniture to the right, behind Wall B level
-  const centreX = 5;    // right side of room
-  const centreZ = -4;   // between Wall C (Z=3) and Wall B (Z=-8), slightly behind
+  // Furniture to the right of Wall C, level with it
+  // Wall C is at X=0, Z=3. Table goes to the right at same Z level.
+  const tableX = 6;     // right of Wall C
+  const tableZ = 3;     // same Z as Wall C
 
   // Plant position: back-left corner of the room
   const plantX = -ROOM_W / 2 + 1.5;   // ≈ -8.5
   const plantZ = -ROOM_D / 2 + 1.5;   // ≈ -28.5
 
-  // Bench offset along Z (benches face each other across the table on Z axis)
-  // Table depth scaled = 3.9, bench seat depth scaled = 4.5
-  // Place benches ±3.2 units along Z from centre
-  const benchOffsetZ = 3.2;
+  // Benches offset along X (face each other across table along X axis)
+  // Backrests face OUTWARD (away from table)
+  const benchOffsetX = 3.2;
 
   return (
     <group>
-      {/* ── TABLE centred in front of Wall C ─────────────────────────── */}
-      <Table position={[centreX, 0, centreZ]} />
+      {/* ── TABLE level with Wall C, to the right ────────────────────── */}
+      <Table position={[tableX, 0, tableZ]} />
 
-      {/* ── BENCH on the -Z side (facing +Z, toward Wall C) ─────────── */}
-      {/* backrestSide=-1 puts backrest on -Z face, bench faces toward table */}
-      <Bench position={[centreX, 0, centreZ - benchOffsetZ]} backrestSide={-1} />
+      {/* ── BENCH on the -X side (left of table, backrest faces left) ── */}
+      <Bench position={[tableX - benchOffsetX, 0, tableZ]} backrestSide={-1} />
 
-      {/* ── BENCH on the +Z side (facing -Z, toward Wall C) ─────────── */}
-      {/* backrestSide=1 puts backrest on +Z face, bench faces toward table */}
-      <Bench position={[centreX, 0, centreZ + benchOffsetZ]} backrestSide={1} />
+      {/* ── BENCH on the +X side (right of table, backrest faces right) ── */}
+      <Bench position={[tableX + benchOffsetX, 0, tableZ]} backrestSide={1} />
 
       {/* ── PLANT in the back-left corner of the room ────────────────── */}
       <Plant position={[plantX, 0, plantZ]} />
