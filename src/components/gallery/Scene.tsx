@@ -69,6 +69,16 @@ function CameraController() {
   useEffect(() => {
     const el = gl.domElement;
 
+    // ─── Detect touch device ────────────────────────────────────────────
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const DRAG_THRESHOLD = isTouchDevice ? 2 : 4;
+    // Touch needs higher speed multiplier for fluid movement
+    const BASE_SPEED = isTouchDevice ? 0.12 : 0.05;
+
+    // ─── Pinch-to-zoom state ─────────────────────────────────────────────
+    const pinchStart = { current: 0 };
+    const isPinching = { current: false };
+
     const onDown = (e: PointerEvent) => {
       if (activePanel) return;
       const target = e.target as HTMLElement;
@@ -80,16 +90,13 @@ function CameraController() {
       ) return;
       pointerDown.current = true;
       isDragging.current = false;
-      // Kill any existing momentum on new drag start
       velocity.current = { x: 0, z: 0 };
       lastPointer.current = { x: e.clientX, y: e.clientY };
       dragStart.current = { x: e.clientX, y: e.clientY };
     };
 
-    const DRAG_THRESHOLD = 4;
-
     const onMove = (e: PointerEvent) => {
-      if (!pointerDown.current) return;
+      if (!pointerDown.current || isPinching.current) return;
 
       if (!isDragging.current) {
         const dx = e.clientX - dragStart.current.x;
@@ -100,7 +107,7 @@ function CameraController() {
         document.body.style.cursor = 'grabbing';
       }
 
-      const speed = 0.05 * (35 / zoomLevel.current);
+      const speed = BASE_SPEED * (35 / zoomLevel.current);
       const dx = (e.clientX - lastPointer.current.x) * speed;
       const dy = (e.clientY - lastPointer.current.y) * speed;
 
@@ -110,7 +117,6 @@ function CameraController() {
       panX.current += vx;
       panZ.current += vz;
 
-      // Track velocity for momentum
       velocity.current = { x: vx, z: vz };
 
       lastPointer.current = { x: e.clientX, y: e.clientY };
@@ -122,9 +128,9 @@ function CameraController() {
       isDragging.current = false;
       el.style.cursor = 'grab';
       document.body.style.cursor = 'grab';
-      // velocity.current is intentionally NOT zeroed here — momentum continues
     };
 
+    // ─── Mouse wheel zoom ────────────────────────────────────────────────
     const onWheel = (e: WheelEvent) => {
       if ((e.target as HTMLElement).closest('[data-ui-overlay]')) return;
       e.preventDefault();
@@ -136,16 +142,57 @@ function CameraController() {
       applyCam();
     };
 
+    // ─── Touch: pinch-to-zoom ────────────────────────────────────────────
+    const getTouchDistance = (touches: TouchList) => {
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        isPinching.current = true;
+        pinchStart.current = getTouchDistance(e.touches);
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && isPinching.current) {
+        e.preventDefault();
+        const dist = getTouchDistance(e.touches);
+        const delta = dist - pinchStart.current;
+        zoomLevel.current = THREE.MathUtils.clamp(
+          zoomLevel.current + delta * 0.08,
+          8,
+          80
+        );
+        pinchStart.current = dist;
+        applyCam();
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) {
+        isPinching.current = false;
+      }
+    };
+
     document.addEventListener('pointerdown', onDown, false);
     document.addEventListener('pointermove', onMove, false);
     document.addEventListener('pointerup', onUp, false);
     el.addEventListener('wheel', onWheel, { passive: false });
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: false });
 
     return () => {
       document.removeEventListener('pointerdown', onDown);
       document.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerup', onUp);
       el.removeEventListener('wheel', onWheel);
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
     };
   }, [gl, activePanel]);
 
