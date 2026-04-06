@@ -19,31 +19,31 @@ function Bench({ position, backrestSide = 1, rotateY = 0 }: { position: [number,
 
   const backH = 0.9;        // 0.6 × 1.5
   const backThick = 0.09;   // 0.06 × 1.5
-  // Backrest sits on the Z-axis side (benches face each other along X)
-  // backrestSide now controls Z position, benches face X
-  const backZ = backrestSide * (seatD / 2 + backThick / 2);
+  // Backrest on the LONG side (seatD side, along Z axis)
+  // backrestSide controls which Z edge the backrest is on
+  const backZ = backrestSide * (seatW / 2 + backThick / 2);
 
   return (
     <group position={position} rotation={[0, rotateY, 0]}>
       {/* Seat plank */}
       <mesh position={[0, seatY + seatThick / 2, 0]}>
-        <boxGeometry args={[seatW, seatThick, seatD]} />
+        <boxGeometry args={[seatD, seatThick, seatW]} />
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>
       {/* Four legs */}
-      {([-seatD / 2 + 0.3, seatD / 2 - 0.3] as number[]).flatMap((z) =>
-        ([-seatW / 2 + 0.105, seatW / 2 - 0.105] as number[]).map((x, j) => (
-          <mesh key={`leg-${z}-${j}`} position={[x, legH / 2, z]}>
+      {([-seatD / 2 + 0.3, seatD / 2 - 0.3] as number[]).flatMap((x) =>
+        ([-seatW / 2 + 0.105, seatW / 2 - 0.105] as number[]).map((z, j) => (
+          <mesh key={`leg-${x}-${j}`} position={[x, legH / 2, z]}>
             <boxGeometry args={[legW, legH, legW]} />
             <meshStandardMaterial color="#f0f0ec" />
             <Edges color="#1a1a1a" threshold={1} />
           </mesh>
         ))
       )}
-      {/* Backrest — along Z face */}
+      {/* Backrest — along the LONG side (runs along X, on the Z edge) */}
       <mesh position={[0, seatY + seatThick + backH / 2, backZ]}>
-        <boxGeometry args={[seatW, backH, backThick]} />
+        <boxGeometry args={[seatD, backH, backThick]} />
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>

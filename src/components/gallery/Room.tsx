@@ -277,12 +277,12 @@ export default function Room() {
         <boxGeometry args={[WALL_B_LEFT_W, 0.04, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall B RIGHT half base — both sides */}
-      <mesh position={[WALL_B_RIGHT_X, 0.02, WALL_B_Z + T / 2 + 0.02]}>
+      {/* Wall B RIGHT half base — uses WALL_B_RIGHT_Z */}
+      <mesh position={[WALL_B_RIGHT_X, 0.02, WALL_B_RIGHT_Z + T / 2 + 0.02]}>
         <boxGeometry args={[WALL_B_RIGHT_W, 0.04, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      <mesh position={[WALL_B_RIGHT_X, 0.02, WALL_B_Z - T / 2 - 0.02]}>
+      <mesh position={[WALL_B_RIGHT_X, 0.02, WALL_B_RIGHT_Z - T / 2 - 0.02]}>
         <boxGeometry args={[WALL_B_RIGHT_W, 0.04, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
@@ -337,8 +337,8 @@ export default function Room() {
         <boxGeometry args={[WALL_B_LEFT_W, 0.03, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall B RIGHT half top */}
-      <mesh position={[WALL_B_RIGHT_X, WALL_H, WALL_B_Z]}>
+      {/* Wall B RIGHT half top — uses WALL_B_RIGHT_Z */}
+      <mesh position={[WALL_B_RIGHT_X, WALL_H, WALL_B_RIGHT_Z]}>
         <boxGeometry args={[WALL_B_RIGHT_W, 0.03, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
@@ -384,12 +384,12 @@ export default function Room() {
         <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall B RIGHT half ends */}
-      <mesh position={[WALL_B_RIGHT_X - WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_Z]}>
+      {/* Wall B RIGHT half ends — uses WALL_B_RIGHT_Z */}
+      <mesh position={[WALL_B_RIGHT_X - WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_RIGHT_Z]}>
         <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      <mesh position={[WALL_B_RIGHT_X + WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_Z]}>
+      <mesh position={[WALL_B_RIGHT_X + WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_RIGHT_Z]}>
         <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
