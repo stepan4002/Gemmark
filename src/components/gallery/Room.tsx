@@ -23,10 +23,10 @@ export const WALL_H = 7.5;
 // Shortened to 8 units (from 14) since only 2 service frames are needed.
 export const WALL_A_Z = 12;          // Z position of Wall A centre line
 export const WALL_B_Z = -8;          // Z position of Wall B centre line
-export const DIVIDER_WIDTH = 8;      // shortened — only 2 service frames needed
-export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 12 — larger gap on left side
-// X centre: right edge at X=10, extends DIVIDER_WIDTH units left → left edge at X=2, centre X=6
-export const DIVIDER_X = ROOM_W / 2 - DIVIDER_WIDTH / 2; // = 10 - 4 = 6
+export const DIVIDER_WIDTH = 12;     // wider to fit services properly
+export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 8 — gap on left side
+// X centre: right edge at X=10, extends DIVIDER_WIDTH units left → left edge at X=-2, centre X=4
+export const DIVIDER_X = ROOM_W / 2 - DIVIDER_WIDTH / 2; // = 10 - 6 = 4
 
 // ─── Staircase ────────────────────────────────────────────────────────────────
 export const STAIR_X = 2;            // center-right
@@ -58,12 +58,12 @@ export const HOW_WALL_RIGHT_X = -1;
 export const HOW_WALL_SEGMENT_W = 7;
 
 // ─── Wall B split into two segments ──────────────────────────────────────────
-// Wall B LEFT: "Ako to funguje?" (process) — kept same size
-export const WALL_B_LEFT_X = DIVIDER_X - DIVIDER_WIDTH / 4;   // = 6 - 2 = 4
-export const WALL_B_LEFT_W = DIVIDER_WIDTH / 2 - 0.3;         // = 3.7
-// Wall B RIGHT: "Ako sa s nami spojíš?" (contact) — WIDER, extends further left
-export const WALL_B_RIGHT_X = 0;   // centered in room (moved left from 8)
-export const WALL_B_RIGHT_W = 8;   // much wider (was 3.7)
+// Wall B LEFT: "Ako to funguje?" — on the LEFT side of the room, behind frame 10
+export const WALL_B_LEFT_X = -6;   // left side of room
+export const WALL_B_LEFT_W = 6;    // wider
+// Wall B RIGHT: "Ako sa s nami spojíš?" — on the RIGHT side, wider
+export const WALL_B_RIGHT_X = 4;   // right-center
+export const WALL_B_RIGHT_W = 8;   // wide
 
 // ─── Connecting wall from Wall A left end, going FORWARD (toward entrance) ───
 // This wall carries "Čo, kedy a kde sa u nás deje?" content.
