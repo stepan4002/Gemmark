@@ -29,8 +29,8 @@ const Scene = dynamic(() => import('@/components/gallery/Scene'), {
 // Fix R3F canvas resize issue - poll until canvas is found and resize it
 function useCanvasResizeFix() {
   useEffect(() => {
-    let rafId: number;
-    let resizeTimeout: NodeJS.Timeout;
+    let rafId: number | undefined;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
 
     const fixCanvas = () => {
       const canvas = document.querySelector('canvas');
@@ -59,7 +59,7 @@ function useCanvasResizeFix() {
       clearInterval(interval);
       clearTimeout(resizeTimeout);
       window.removeEventListener('resize', onResize);
-      cancelAnimationFrame(rafId);
+      if (rafId !== undefined) cancelAnimationFrame(rafId);
     };
   }, []);
 }
