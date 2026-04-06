@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+GemMark_projekt.docx
+aaa project documentation
+CLAUDE.md
+AGENTS.md
+*.md
+.claude

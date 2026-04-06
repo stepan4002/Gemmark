@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Project documentation (not part of website)
+GemMark_projekt.docx
+aaa project documentation/
+CLAUDE.md
+AGENTS.md
