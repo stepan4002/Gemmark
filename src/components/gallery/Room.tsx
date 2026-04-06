@@ -22,7 +22,7 @@ export const WALL_H = 7.5;
 // Wall A connects to the RIGHT wall and leaves a gap on the LEFT side.
 // Shortened to 8 units (from 14) since only 2 service frames are needed.
 export const WALL_A_Z = 16;          // Z position — moved FORWARD for more space
-export const WALL_B_Z = -12;         // Z position — moved slightly back
+export const WALL_B_Z = -14;         // Z position — moved further back
 export const DIVIDER_WIDTH = 12;     // wider to fit services properly
 export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 8 — gap on left side
 // X centre: right edge at X=10, extends DIVIDER_WIDTH units left → left edge at X=-2, centre X=4

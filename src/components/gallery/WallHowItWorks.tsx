@@ -27,7 +27,7 @@ export default function WallHowItWorks() {
     <group>
       {/* ── WALL B LEFT: "Ako to funguje?" — process infographic ──────────── */}
       <Html
-        position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.92, FACE_Z_B]}
+        position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.85, FACE_Z_B]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
@@ -66,7 +66,7 @@ export default function WallHowItWorks() {
 
       {/* ── WALL B RIGHT: "Ako sa s nami spojíš?" — contact, own Z ────────── */}
       <Html
-        position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.92, FACE_Z_B_RIGHT]}
+        position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.85, FACE_Z_B_RIGHT]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
