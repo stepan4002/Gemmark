@@ -48,7 +48,7 @@ export default function WallHowItWorks() {
       <WideFrame
         position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.52, FACE_Z_B + 0.1]}
         rotation={WALL_ROT}
-        size={[5.5, 4.5]}
+        size={[4.5, 3.5]}
         image="/images/services/consultation.jpg"
         label={t.sections['ako-to-funguje']}
         onClickOverride={() =>
@@ -87,7 +87,7 @@ export default function WallHowItWorks() {
       <WideFrame
         position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.52, FACE_Z_B + 0.1]}
         rotation={WALL_ROT}
-        size={[4.5, 4.0]}
+        size={[6.0, 3.5]}
         image="/images/branding/gemmark-icon.jpg"
         label={t.sections['ako-sa-spojis']}
         panelData={{

@@ -21,7 +21,7 @@ export const WALL_H = 7.5;
 // Wall A runs parallel to X-axis (left→right), perpendicular to the room's depth.
 // Wall A connects to the RIGHT wall and leaves a gap on the LEFT side.
 // Shortened to 8 units (from 14) since only 2 service frames are needed.
-export const WALL_A_Z = 12;          // Z position of Wall A centre line
+export const WALL_A_Z = 16;          // Z position — moved FORWARD for more space
 export const WALL_B_Z = -8;          // Z position of Wall B centre line
 export const DIVIDER_WIDTH = 12;     // wider to fit services properly
 export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 8 — gap on left side

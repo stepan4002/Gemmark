@@ -105,17 +105,19 @@ export default function WallOProjekte() {
         transform
         style={{ pointerEvents: 'none' }}
       >
-        <span style={{
+        <div style={{
           color: '#1a1a1a',
-          fontSize: '28px',
+          fontSize: '18px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '2px',
+          letterSpacing: '1px',
           textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
+          textAlign: 'center',
+          maxWidth: '180px',
+          lineHeight: 1.3,
         }}>
           {t.sections['o-projekte']}
-        </span>
+        </div>
       </Html>
 
       {/* Main WideFrame — faces +X independently (no wrapping rotated parent) */}

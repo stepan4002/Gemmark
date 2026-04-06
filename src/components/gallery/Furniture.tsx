@@ -121,16 +121,14 @@ function Plant({ position }: { position: [number, number, number] }) {
 }
 
 // ─── Main Furniture ───────────────────────────────────────────────────────────
-// Table+benches IN FRONT of Wall C (Čo je GemMARK).
-// Wall C is at X=0, Z=3. Place furniture at X=0, Z=6 (in front, toward entrance).
-// Benches are rotated 90°: they now run along the X axis (seatD along X),
-// facing each other across the table along the Z axis.
+// Table+benches to the RIGHT of Wall C, at the level of Ako to funguje wall.
+// Behind Wall B so frame 10 on the left wall is not blocked.
 //
-// Plant in the back-left corner: [-ROOM_W/2 + 1.5, 0, -ROOM_D/2 + 1.5]
+// Plant in the back-left corner.
 export default function Furniture() {
-  // Furniture centred in front of Wall C
-  const centreX = 0;
-  const centreZ = 10;  // in front of Wall C (Z=3), moved further toward entrance to stay visible
+  // Furniture to the right, behind Wall B level
+  const centreX = 5;    // right side of room
+  const centreZ = -4;   // between Wall C (Z=3) and Wall B (Z=-8), slightly behind
 
   // Plant position: back-left corner of the room
   const plantX = -ROOM_W / 2 + 1.5;   // ≈ -8.5
