@@ -142,12 +142,12 @@ export default function WallServices() {
       >
         <span style={{
           color: '#222',
-          fontSize: '28px',
+          fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '2px',
           textTransform: 'uppercase',
-          maxWidth: '400px',
+          whiteSpace: 'nowrap',
         }}>
           {t.sections['nase-sluzby']}
         </span>

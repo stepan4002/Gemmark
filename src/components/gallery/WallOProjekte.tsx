@@ -112,9 +112,7 @@ export default function WallOProjekte() {
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '2px',
           textTransform: 'uppercase',
-          textAlign: 'center',
-          maxWidth: '200px',
-          lineHeight: 1.3,
+          whiteSpace: 'nowrap',
         }}>
           {t.sections['o-projekte']}
         </div>

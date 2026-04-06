@@ -50,7 +50,7 @@ export default function WallEvents() {
       <WideFrame
         position={[FACE_X + 0.06, WALL_HEIGHT * 0.52, CENTER_Z]}
         rotation={FACE_ROT}
-        size={[5.5, 4.0]}
+        size={[3.5, 3.0]}
         image="/images/branding/conference.jpg"
         label={t.sections['co-kedy-kde']}
         panelData={{
