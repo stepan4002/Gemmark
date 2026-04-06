@@ -349,77 +349,77 @@ export default function Room() {
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
 
-      {/* ── VERTICAL CORNER LINES — thicker (0.12) for visibility ────────── */}
+      {/* ── VERTICAL CORNER LINES — wider than wall thickness (T=0.35) so they're visible ── */}
       {/* Back wall + left wall corner */}
       <mesh position={[-halfW, WALL_H / 2, -halfD]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Back wall + right boundary corner */}
       <mesh position={[halfW, WALL_H / 2, -halfD]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall A left end */}
+      {/* Wall A left end — offset outward so it's visible */}
       <mesh position={[DIVIDER_X - DIVIDER_WIDTH / 2, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall A right end — INTERSECTION with right room boundary */}
+      {/* Wall A right end — where it meets room boundary */}
       <mesh position={[DIVIDER_X + DIVIDER_WIDTH / 2, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall A + connecting wall INTERSECTION corner */}
       <mesh position={[CONNECT_WALL_A_X, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall B LEFT half ends */}
       <mesh position={[WALL_B_LEFT_X - WALL_B_LEFT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_B_LEFT_X + WALL_B_LEFT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall B RIGHT half ends — uses WALL_B_RIGHT_Z */}
+      {/* Wall B RIGHT half ends */}
       <mesh position={[WALL_B_RIGHT_X - WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_RIGHT_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_B_RIGHT_X + WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_RIGHT_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall C ends */}
       <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z - WALL_C_LENGTH / 2]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z + WALL_C_LENGTH / 2]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Connecting wall far end */}
       <mesh position={[CONNECT_WALL_A_X, WALL_H / 2, CONNECT_WALL_A_Z_START + CONNECT_WALL_A_LENGTH]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Front-left corner (left wall meets front opening) */}
+      {/* Front-left corner */}
       <mesh position={[-halfW, WALL_H / 2, halfD]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Left wall where it meets Wall A (left side of Wall A junction) */}
+      {/* Left wall at Wall A junction */}
       <mesh position={[-halfW, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Left wall where it meets Wall B LEFT */}
+      {/* Left wall at Wall B LEFT junction */}
       <mesh position={[-halfW, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <boxGeometry args={[T + 0.1, WALL_H + 0.1, T + 0.1]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
     </group>
