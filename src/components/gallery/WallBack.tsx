@@ -27,7 +27,7 @@ export default function WallBack() {
       {/* ── LEFT WALL: "Prečo názov GemMARK?" with circular badge logo ───── */}
       {/* Positioned on the left wall surface (+X face), in the back-left area */}
       <Html
-        position={[LEFT_WALL_X + 0.12, WALL_HEIGHT * 0.9, LEFT_WALL_FRAME_Z + 2.0]}
+        position={[LEFT_WALL_X + 0.12, WALL_HEIGHT * 0.9, LEFT_WALL_FRAME_Z]}
         rotation={LEFT_WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
