@@ -59,18 +59,18 @@ function CameraController() {
       return;
     }
 
-    // Smooth interpolation toward target (makes touch fluid at 60fps)
-    const lerpFactor = 0.25; // higher = snappier, lower = smoother
+    // Smooth interpolation toward target — gives fluid touch movement
     const dx = targetPanX.current - panX.current;
     const dz = targetPanZ.current - panZ.current;
 
-    if (Math.abs(dx) > 0.001 || Math.abs(dz) > 0.001) {
-      panX.current += dx * lerpFactor;
-      panZ.current += dz * lerpFactor;
+    if (Math.abs(dx) > 0.0005 || Math.abs(dz) > 0.0005) {
+      // Use high lerp (0.5) so desktop feels responsive, touch still smooth
+      panX.current += dx * 0.5;
+      panZ.current += dz * 0.5;
       applyCam();
     }
 
-    // Apply momentum/inertia after drag release
+    // Apply momentum/inertia after drag release (fling effect)
     if (
       !isDragging.current &&
       !animating.current &&
@@ -86,25 +86,18 @@ function CameraController() {
   useEffect(() => {
     const el = gl.domElement;
 
-    // ─── Detect touch device ────────────────────────────────────────────
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const DRAG_THRESHOLD = isTouchDevice ? 2 : 4;
-    // Touch needs higher speed multiplier for fluid movement
-    const BASE_SPEED = isTouchDevice ? 0.12 : 0.05;
-
-    // ─── Pinch-to-zoom state ─────────────────────────────────────────────
-    const pinchStart = { current: 0 };
+    // ─── State ────────────────────────────────────────────────────────────
+    const pinchDist = { current: 0 };
     const isPinching = { current: false };
+    const touchDragging = { current: false };
+    const DRAG_THRESHOLD = 4; // mouse only
 
+    // ─── MOUSE: pointer events (desktop) ─────────────────────────────────
     const onDown = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return; // handled by touch events
       if (activePanel) return;
       const target = e.target as HTMLElement;
-      if (
-        target.closest('[data-ui-overlay]') ||
-        target.closest('button') ||
-        target.closest('nav') ||
-        target.closest('a')
-      ) return;
+      if (target.closest('[data-ui-overlay]') || target.closest('button') || target.closest('nav') || target.closest('a')) return;
       pointerDown.current = true;
       isDragging.current = false;
       velocity.current = { x: 0, z: 0 };
@@ -113,102 +106,113 @@ function CameraController() {
     };
 
     const onMove = (e: PointerEvent) => {
-      if (!pointerDown.current || isPinching.current) return;
-
+      if (e.pointerType === 'touch') return;
+      if (!pointerDown.current) return;
       if (!isDragging.current) {
-        const dx = e.clientX - dragStart.current.x;
-        const dy = e.clientY - dragStart.current.y;
-        if (Math.sqrt(dx * dx + dy * dy) < DRAG_THRESHOLD) return;
+        const ddx = e.clientX - dragStart.current.x;
+        const ddy = e.clientY - dragStart.current.y;
+        if (Math.sqrt(ddx * ddx + ddy * ddy) < DRAG_THRESHOLD) return;
         isDragging.current = true;
         el.style.cursor = 'grabbing';
-        document.body.style.cursor = 'grabbing';
       }
-
-      const speed = BASE_SPEED * (35 / zoomLevel.current);
+      const speed = 0.05 * (35 / zoomLevel.current);
       const dx = (e.clientX - lastPointer.current.x) * speed;
       const dy = (e.clientY - lastPointer.current.y) * speed;
-
       const vx = -(dx * 0.707 + dy * 0.707);
       const vz = dx * 0.707 - dy * 0.707;
-
       targetPanX.current += vx;
       targetPanZ.current += vz;
-
       velocity.current = { x: vx, z: vz };
-
       lastPointer.current = { x: e.clientX, y: e.clientY };
     };
 
-    const onUp = () => {
+    const onUp = (e: PointerEvent) => {
+      if (e.pointerType === 'touch') return;
       pointerDown.current = false;
       isDragging.current = false;
       el.style.cursor = 'grab';
-      document.body.style.cursor = 'grab';
     };
 
     // ─── Mouse wheel zoom ────────────────────────────────────────────────
     const onWheel = (e: WheelEvent) => {
       if ((e.target as HTMLElement).closest('[data-ui-overlay]')) return;
       e.preventDefault();
-      zoomLevel.current = THREE.MathUtils.clamp(
-        zoomLevel.current - e.deltaY * 0.025,
-        8,
-        80
-      );
+      zoomLevel.current = THREE.MathUtils.clamp(zoomLevel.current - e.deltaY * 0.025, 8, 80);
       applyCam();
     };
 
-    // ─── Touch: pinch-to-zoom ────────────────────────────────────────────
-    const getTouchDistance = (touches: TouchList) => {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
+    // ─── TOUCH: native touch events (mobile) ─────────────────────────────
+    // These fire at high frequency and give truly fluid 1:1 finger tracking
+    const getTouchDist = (t: TouchList) => {
+      const dx = t[0].clientX - t[1].clientX;
+      const dy = t[0].clientY - t[1].clientY;
       return Math.sqrt(dx * dx + dy * dy);
     };
 
     const onTouchStart = (e: TouchEvent) => {
+      if (activePanel) return;
       if (e.touches.length === 2) {
         isPinching.current = true;
-        pinchStart.current = getTouchDistance(e.touches);
+        touchDragging.current = false;
+        pinchDist.current = getTouchDist(e.touches);
+      } else if (e.touches.length === 1) {
+        isPinching.current = false;
+        touchDragging.current = true;
+        velocity.current = { x: 0, z: 0 };
+        lastPointer.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
 
     const onTouchMove = (e: TouchEvent) => {
       if (e.touches.length === 2 && isPinching.current) {
+        // Pinch zoom
         e.preventDefault();
-        const dist = getTouchDistance(e.touches);
-        const delta = dist - pinchStart.current;
-        zoomLevel.current = THREE.MathUtils.clamp(
-          zoomLevel.current + delta * 0.08,
-          8,
-          80
-        );
-        pinchStart.current = dist;
+        const dist = getTouchDist(e.touches);
+        const delta = dist - pinchDist.current;
+        zoomLevel.current = THREE.MathUtils.clamp(zoomLevel.current + delta * 0.08, 8, 80);
+        pinchDist.current = dist;
         applyCam();
+      } else if (e.touches.length === 1 && touchDragging.current && !isPinching.current) {
+        // Single finger drag — fluid, no threshold, no coalescing
+        e.preventDefault();
+        const tx = e.touches[0].clientX;
+        const ty = e.touches[0].clientY;
+        const speed = 0.15 * (35 / zoomLevel.current);
+        const dx = (tx - lastPointer.current.x) * speed;
+        const dy = (ty - lastPointer.current.y) * speed;
+        const vx = -(dx * 0.707 + dy * 0.707);
+        const vz = dx * 0.707 - dy * 0.707;
+        targetPanX.current += vx;
+        targetPanZ.current += vz;
+        velocity.current = { x: vx * 1.5, z: vz * 1.5 }; // boost for fling
+        lastPointer.current = { x: tx, y: ty };
       }
     };
 
-    const onTouchEnd = (e: TouchEvent) => {
-      if (e.touches.length < 2) {
-        isPinching.current = false;
+    const onTouchEnd = () => {
+      if (touchDragging.current) {
+        touchDragging.current = false;
+        // velocity is kept for momentum/fling
       }
+      isPinching.current = false;
     };
 
     document.addEventListener('pointerdown', onDown, false);
     document.addEventListener('pointermove', onMove, false);
     document.addEventListener('pointerup', onUp, false);
     el.addEventListener('wheel', onWheel, { passive: false });
-    el.addEventListener('touchstart', onTouchStart, { passive: false });
-    el.addEventListener('touchmove', onTouchMove, { passive: false });
-    el.addEventListener('touchend', onTouchEnd, { passive: false });
+    document.addEventListener('touchstart', onTouchStart, { passive: false });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd, { passive: false });
 
     return () => {
       document.removeEventListener('pointerdown', onDown);
       document.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerup', onUp);
       el.removeEventListener('wheel', onWheel);
-      el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchmove', onTouchMove);
-      el.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
     };
   }, [gl, activePanel]);
 
