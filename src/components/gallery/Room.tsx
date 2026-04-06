@@ -61,9 +61,10 @@ export const HOW_WALL_SEGMENT_W = 7;
 // Wall B LEFT: "Ako to funguje?" — on the LEFT side of the room, behind frame 10
 export const WALL_B_LEFT_X = -6;   // left side of room
 export const WALL_B_LEFT_W = 6;    // wider
-// Wall B RIGHT: "Ako sa s nami spojíš?" — on the RIGHT side, wider
+// Wall B RIGHT: "Ako sa s nami spojíš?" — on the RIGHT side, moved FORWARD to not cover floor mission
 export const WALL_B_RIGHT_X = 4;   // right-center
 export const WALL_B_RIGHT_W = 8;   // wide
+export const WALL_B_RIGHT_Z = -6;  // its own Z, forward of WALL_B_Z to clear floor mission
 
 // ─── Connecting wall from Wall A left end, going FORWARD (toward entrance) ───
 // This wall carries "Čo, kedy a kde sa u nás deje?" content.
@@ -219,9 +220,9 @@ export default function Room() {
         pos={[WALL_B_LEFT_X, WALL_H / 2, WALL_B_Z]}
         size={[WALL_B_LEFT_W, WALL_H, T]}
       />
-      {/* RIGHT half: "Ako sa s nami spojíš?" */}
+      {/* RIGHT half: "Ako sa s nami spojíš?" — uses its own Z, forward of LEFT */}
       <WhiteBox
-        pos={[WALL_B_RIGHT_X, WALL_H / 2, WALL_B_Z]}
+        pos={[WALL_B_RIGHT_X, WALL_H / 2, WALL_B_RIGHT_Z]}
         size={[WALL_B_RIGHT_W, WALL_H, T]}
       />
 

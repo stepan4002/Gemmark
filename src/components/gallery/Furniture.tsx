@@ -9,7 +9,7 @@ import {
 
 // ─── Bench component ──────────────────────────────────────────────────────────
 // Original dimensions × 1.5 scale factor
-function Bench({ position, backrestSide = 1 }: { position: [number, number, number]; backrestSide?: -1 | 1 }) {
+function Bench({ position, backrestSide = 1, rotateY = 0 }: { position: [number, number, number]; backrestSide?: -1 | 1; rotateY?: number }) {
   const seatThick = 0.09;   // 0.06 × 1.5
   const seatW = 1.5;        // 1.0 × 1.5
   const seatD = 4.5;        // 3.0 × 1.5
@@ -24,7 +24,7 @@ function Bench({ position, backrestSide = 1 }: { position: [number, number, numb
   const backZ = backrestSide * (seatD / 2 + backThick / 2);
 
   return (
-    <group position={position}>
+    <group position={position} rotation={[0, rotateY, 0]}>
       {/* Seat plank */}
       <mesh position={[0, seatY + seatThick / 2, 0]}>
         <boxGeometry args={[seatW, seatThick, seatD]} />
@@ -53,7 +53,7 @@ function Bench({ position, backrestSide = 1 }: { position: [number, number, numb
 
 // ─── Table component ──────────────────────────────────────────────────────────
 // Original dimensions × 1.5 scale factor
-function Table({ position }: { position: [number, number, number] }) {
+function Table({ position, rotateY = 0 }: { position: [number, number, number]; rotateY?: number }) {
   const topH = 0.975;       // 0.65 × 1.5
   const topW = 2.7;         // 1.8 × 1.5
   const topD = 3.9;         // 2.6 × 1.5
@@ -61,7 +61,7 @@ function Table({ position }: { position: [number, number, number] }) {
   const legW = 0.12;        // 0.08 × 1.5
 
   return (
-    <group position={position}>
+    <group position={position} rotation={[0, rotateY, 0]}>
       {/* Table top */}
       <mesh position={[0, topH + 0.045, 0]}>
         <boxGeometry args={[topW, 0.09, topD]} />
@@ -141,14 +141,14 @@ export default function Furniture() {
 
   return (
     <group>
-      {/* ── TABLE level with Wall C, to the right ────────────────────── */}
-      <Table position={[tableX, 0, tableZ]} />
+      {/* ── TABLE level with Wall C, rotated 90° so long side runs along X ── */}
+      <Table position={[tableX, 0, tableZ]} rotateY={Math.PI / 2} />
 
-      {/* ── BENCH in front of table (+Z side, backrest faces +Z / entrance) ── */}
-      <Bench position={[tableX, 0, tableZ + benchOffsetZ]} backrestSide={1} />
+      {/* ── BENCH in front (+Z), rotated 90°, backrest faces entrance ── */}
+      <Bench position={[tableX, 0, tableZ + benchOffsetZ]} backrestSide={1} rotateY={Math.PI / 2} />
 
-      {/* ── BENCH behind table (-Z side, backrest faces -Z / back wall) ── */}
-      <Bench position={[tableX, 0, tableZ - benchOffsetZ]} backrestSide={-1} />
+      {/* ── BENCH behind (-Z), rotated 90°, backrest faces back wall ── */}
+      <Bench position={[tableX, 0, tableZ - benchOffsetZ]} backrestSide={-1} rotateY={Math.PI / 2} />
 
       {/* ── PLANT in the back-left corner of the room ────────────────── */}
       <Plant position={[plantX, 0, plantZ]} />
