@@ -6,31 +6,36 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useGalleryStore } from '@/store/useGalleryStore';
 import { useTranslation } from '@/hooks/useTranslation';
-import { HOW_WALL_LEFT_X, HOW_WALL_Z, WALL_HEIGHT } from './Room';
 
-// "Aká je naša misia?" — now mounted on the HOW_WALL left segment (where Ako to funguje was).
-// HOW_WALL_Z = -16. Front face at Z ≈ HOW_WALL_Z + T/2 + 0.01.
-// Left segment centre X = HOW_WALL_LEFT_X = -7.
+// "Aká je naša misia?" — now placed FLAT ON THE FLOOR in the back room.
+// Centred at approximately X=0, Z=-22 (behind Wall B, in the back section).
+// The frame and text lie flat (rotation=[-Math.PI/2, 0, 0]).
+// A floating/bobbing animation makes it eye-catching from above.
 
-const T = 0.35;
-// Front face of HOW_WALL — the side facing toward the entrance (positive Z)
-const FACE_Z = HOW_WALL_Z + T / 2 + 0.01;
-const WALL_ROT: [number, number, number] = [0, 0, 0]; // faces +Z, no rotation needed
+const FLOOR_X = 0;
+const FLOOR_Z = -22;
+const FRAME_W = 10;
+const FRAME_H = 6;
+const BORDER = 0.2;
+const BASE_Y = 0.05; // slightly above floor
 
 export default function WallMission() {
   const { t } = useTranslation();
   const openPanel = useGalleryStore((s) => s.openPanel);
   const [hovered, setHovered] = useState(false);
   const groupRef = useRef<THREE.Group>(null);
+  const timer = useRef(0);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!groupRef.current) return;
-    const baseY = WALL_HEIGHT * 0.5;
-    const targetY = hovered ? baseY + 0.15 : baseY;
+    timer.current += delta * 1.2;
+    // Gentle floating bob: ±0.08 units above floor
+    const bob = Math.sin(timer.current) * 0.08;
+    const targetY = BASE_Y + bob;
     groupRef.current.position.y = THREE.MathUtils.lerp(
       groupRef.current.position.y,
       targetY,
-      0.1,
+      0.06,
     );
   });
 
@@ -38,48 +43,38 @@ export default function WallMission() {
   const lastWord = missionWords[missionWords.length - 1];
   const firstWords = missionWords.slice(0, -1);
 
-  // Frame is ~4 units wide centred on HOW_WALL_LEFT_X
-  const frameW = 4.2;
-  const frameH = 4.4;
-  const textOffX = -frameW / 2 + 0.4;
+  const fw = FRAME_W + BORDER * 2;
+  const fh = FRAME_H + BORDER * 2;
 
   return (
     <group>
-      {/* Section label — fixed on wall, does NOT move with hover */}
-      <Html
-        position={[HOW_WALL_LEFT_X, WALL_HEIGHT * 0.88, FACE_Z + 0.12]}
-        rotation={WALL_ROT}
-        transform
-        style={{ pointerEvents: 'none' }}
-      >
-        <span style={{
-          color: '#1a1a1a',
-          fontSize: '18px',
-          fontWeight: '900',
-          fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-        }}>
-          {t.sections['nasa-misia']}
-        </span>
-      </Html>
-
-      {/* Animated group — frame + content moves on hover */}
+      {/* Animated floating group — lies flat on the floor */}
       <group
         ref={groupRef}
-        position={[HOW_WALL_LEFT_X, WALL_HEIGHT * 0.5, FACE_Z + 0.1]}
+        position={[FLOOR_X, BASE_Y, FLOOR_Z]}
+        rotation={[-Math.PI / 2, 0, 0]}
       >
-        {/* Visible frame border */}
-        <mesh>
-          <boxGeometry args={[frameW, frameH, 0.06]} />
+        {/* Frame border — flat on floor */}
+        <mesh position={[0, 0, -0.04]}>
+          <boxGeometry args={[fw, fh, 0.08]} />
           <meshStandardMaterial color="#ffffff" />
           <Edges color="#1a1a1a" threshold={1} />
         </mesh>
 
-        {/* Invisible clickable plane */}
+        {/* Inner panel */}
+        <mesh position={[0, 0, -0.02]}>
+          <planeGeometry args={[FRAME_W, FRAME_H]} />
+          <meshStandardMaterial
+            color={hovered ? '#f5f5f5' : '#ffffff'}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+
+        {/* Invisible click plane */}
         <mesh
-          onPointerEnter={() => {
+          position={[0, 0, 0.02]}
+          onPointerEnter={(e) => {
+            e.stopPropagation();
             setHovered(true);
             document.body.style.cursor = 'pointer';
           }}
@@ -94,56 +89,69 @@ export default function WallMission() {
               id: 'nasa-misia',
               title: t.sections['nasa-misia'],
               description: t.nasaMisiaDesc,
-              image: '/images/branding/gemmark-logo.jpg',
+              image: '/images/branding/gemmark-logo-new.png',
             });
           }}
         >
-          <planeGeometry args={[frameW, frameH]} />
-          <meshStandardMaterial
-            color={hovered ? '#f5f5f5' : '#ffffff'}
-            transparent
-            opacity={0}
-          />
+          <planeGeometry args={[fw, fh]} />
+          <meshStandardMaterial transparent opacity={0} side={THREE.DoubleSide} />
         </mesh>
 
-        {/* Large display text — centered inside frame */}
+        {/* Section label */}
         <Html
           center
-          position={[0, 0.6, 0.02]}
-          rotation={WALL_ROT}
-          transform
+          position={[0, 2.0, 0.04]}
+          style={{ pointerEvents: 'none' }}
+        >
+          <div style={{
+            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            color: '#aaaaaa',
+            fontSize: '28px',
+            fontWeight: '900',
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            textAlign: 'center',
+            maxWidth: '400px',
+            whiteSpace: 'nowrap',
+          }}>
+            {t.sections['nasa-misia']}
+          </div>
+        </Html>
+
+        {/* Large display text — centred on floor frame */}
+        <Html
+          center
+          position={[0, 0, 0.04]}
           style={{ pointerEvents: 'none' }}
         >
           <div style={{
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
             color: '#1a1a1a',
-            lineHeight: 1.15,
+            lineHeight: 1.2,
             textAlign: 'center',
           }}>
             {firstWords.map((word, i) => (
-              <div key={i} style={{ fontSize: '16px', fontWeight: '300', letterSpacing: '-0.5px' }}>
+              <div key={i} style={{ fontSize: '36px', fontWeight: '300', letterSpacing: '-1px' }}>
                 {word}
               </div>
             ))}
-            <div style={{ fontSize: '16px', fontWeight: '700', letterSpacing: '-0.5px' }}>
+            <div style={{ fontSize: '36px', fontWeight: '700', letterSpacing: '-1px' }}>
               {lastWord}.
             </div>
           </div>
         </Html>
 
-        {/* Short tagline — centered inside frame */}
+        {/* Click hint */}
         <Html
           center
-          position={[0, -1.4, 0.02]}
-          rotation={WALL_ROT}
-          transform
+          position={[0, -2.2, 0.04]}
           style={{ pointerEvents: 'none' }}
         >
           <div style={{
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
-            color: '#666',
-            fontSize: '7px',
-            lineHeight: 1.7,
+            color: '#999',
+            fontSize: '10px',
+            letterSpacing: '1px',
             textAlign: 'center',
           }}>
             {t.klikniPreViac}

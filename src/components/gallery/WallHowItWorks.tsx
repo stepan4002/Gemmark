@@ -19,27 +19,26 @@ const WALL_ROT: [number, number, number] = [0, 0, 0]; // both face +Z
 
 export default function WallHowItWorks() {
   const { t } = useTranslation();
-  const openFullPageOverlay = useGalleryStore((s) => s.openFullPageOverlay);
   const openPanel = useGalleryStore((s) => s.openPanel);
 
   return (
     <group>
       {/* ── WALL B LEFT: "Ako to funguje?" — process infographic ──────────── */}
       <Html
-        position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.9, FACE_Z_B]}
+        position={[WALL_B_LEFT_X, WALL_HEIGHT * 0.92, FACE_Z_B]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '16px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '140px',
+          maxWidth: '400px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-to-funguje']}
@@ -53,30 +52,32 @@ export default function WallHowItWorks() {
         image="/images/services/consultation.jpg"
         label={t.sections['ako-to-funguje']}
         onClickOverride={() =>
-          openFullPageOverlay({
+          openPanel({
+            type: 'info',
             id: 'ako-to-funguje',
             title: t.sections['ako-to-funguje'],
-            content: t.akoToFungujeFull,
+            description: t.akoToFungujeDesc,
+            image: '/images/services/consultation.jpg',
           })
         }
       />
 
       {/* ── WALL B RIGHT: "Ako sa s nami spojíš?" — contact ──────────────── */}
       <Html
-        position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.9, FACE_Z_B]}
+        position={[WALL_B_RIGHT_X, WALL_HEIGHT * 0.92, FACE_Z_B]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '16px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '140px',
+          maxWidth: '400px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-sa-spojis']}

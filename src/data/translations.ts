@@ -5,7 +5,7 @@ export const translations = {
     instruction1: 'Ťahaj pre pohyb po miestnosti',
     instruction2: 'Skroluj pre priblíženie a oddialenie',
     instruction3: 'Klikni na rámčeky pre viac detailov',
-    enterButton: 'Vstúpiť',
+    enterButton: 'VSTÚPIŤ DO GALÉRIE GEMERA',
 
     // Navigation
     navLabel: 'Navigácia:',
@@ -92,7 +92,7 @@ export const translations = {
     instruction1: 'Húzd a szobában való mozgáshoz',
     instruction2: 'Görgess a nagyításhoz és kicsinyítéshez',
     instruction3: 'Kattints a keretekre a részletekért',
-    enterButton: 'Belépés',
+    enterButton: 'BELÉPÉS A GÖMÖRI GALÉRIÁBA',
 
     navLabel: 'Navigáció:',
     footerLabel: 'DIÁK MÉDIA LABOR · GÖMÖR, SZLOVÁKIA',
@@ -168,7 +168,84 @@ export const translations = {
       'co-kedy-kde': 'Mi, mikor és hol történik nálunk?',
     },
   },
+  en: {
+    brandTagline: 'Student Media Lab · Gemer',
+    instruction1: 'Drag to move around the room',
+    instruction2: 'Scroll to zoom in and out',
+    instruction3: 'Click on frames for more details',
+    enterButton: 'ENTER THE GEMER GALLERY',
+
+    navLabel: 'Navigation:',
+    footerLabel: 'STUDENT MEDIA LAB · GEMER, SLOVAKIA',
+
+    portfolio: 'Portfolio',
+    naseSluzby: 'Our Services',
+    nasaMisia: 'Our Mission',
+    oProjekte: 'About the Project',
+    akoToFunguje: 'How does it work?',
+    precoGemmark: 'Why GemMARK?',
+    ktoZaTym: 'Who is behind GemMARK?',
+    kontakt: 'Contact',
+
+    vystupy: 'Deliverables:',
+    navstivitProjekt: 'Visit project',
+    viacInformacii: 'More information',
+    klikniPreViac: 'Click for more information',
+    pripravujeme: 'Coming soon...',
+
+    tvorimeObrazGemera: 'We shape the image of Gemer.',
+
+    spatDoGalerie: '← Back to gallery',
+    deliverables: 'What we created',
+    galeria: 'Gallery',
+    odkazy: 'Links',
+    technickeDetaily: 'Technical details',
+    oProjekteLabel: 'About the project',
+    lokalita: 'Location',
+    typKlienta: 'Client type',
+    rok: 'Year',
+
+    coJeGemmarkDesc: 'GemMARK is a place where young people learn marketing through practice while also helping the region to be seen and heard more.\n\n"I learn – I create – I help – I leave a mark in the region."\n\nGemMARK – Student Media Lab is a regional, community, creative and educational centre focused on connecting the needs of the Gemer region in marketing, media and presentation with the natural interest of young people in creativity, digital creation, photography, video, spoken word, social media and modern communication tools.\n\nYoung people from Rožňava and its surroundings take part in carrying out specific commissions for Gemer craftspeople, entrepreneurs, municipalities, cultural organisations and regional projects.',
+
+    coJeGemmarkFull: 'GemMARK is a place where young people learn marketing through practice while also helping the region to be seen and heard more. "I learn – I create – I help – I leave a mark in the region."\n\nGemMARK – Student Media Lab is a regional, community, creative and educational centre focused on connecting the needs of the Gemer region in marketing, media and presentation with the natural interest of young people in creativity, digital creation, photography, video, spoken word, social media and modern communication tools. The project creates a space in which learning is connected with practice, and where young people gain experience not just theoretically, but directly through working on real projects for real clients from the region.\n\nYoung people from Rožňava and its surroundings take part in carrying out specific commissions for Gemer craftspeople, entrepreneurs, municipalities, cultural organisations and regional projects. Under the guidance of mentors and practitioners, they participate in creating logos and visual identities, websites, texts and slogans, photographs, videos, podcasts, social media management and gradually also complex marketing strategies.\n\nAn important part of the project is the community dimension. GemMARK builds a community of young people, strengthens their relationship with the region and creates a safe and supportive environment in which they learn to collaborate, communicate, present their ideas, receive feedback, make mistakes and grow without fear of ridicule.\n\nThe project is built on collaboration between experts, mentors and regional partners and functions as a creative centre, marketing studio and community space in one.\n\nGemMARK also contributes to making the Gemer region more visible, as young people create media and marketing content with a regional focus and help present craftspeople, entrepreneurs, municipalities, cultural events and interesting projects in the region.',
+
+    akoToFungujeFull: 'GemMARK works as a creative studio in which students work together with mentors on real projects for real clients from the Gemer region. These are not theoretical assignments but real work — logos, websites, photographs, videos, posters, social media, podcasts or marketing strategies for entire campaigns.\n\nStudent → Mentor → Team → Client → Project → Output → Portfolio → Experience\n\nStudents — The foundation of GemMARK are students — young people who want to learn graphic design, photography, video, web creation, copywriting, social media management, moderation or marketing strategies.\n\nMentors — They are guided by mentors — experienced graphic designers, photographers, web developers, marketers, editors, camera operators and other practitioners.\n\nTeams — Each project is worked on by a student team. Each team member has their own role.\n\nClients — A client can be a craftsperson, entrepreneur, municipality, cultural organisation or an interesting project from the Gemer region.\n\nProject — At the start, the brief, scope of work and deadlines are agreed together.\n\nOutput — The result of the project is a real deliverable — for example a logo, website, photographs, video, poster, article, podcast or an entire marketing campaign.',
+
+    precoGemmarkDesc: 'Gem = Gemer\nMARK = Marketing, tradeMARK (brand), Mark, Grade, Target\n\nThe name GemMARK contains several meanings:\n\nGem refers to the Gemer region — the place where the project was born and where it operates. It is a region with a rich history, traditions, craftspeople, entrepreneurs and culture that deserves to be seen and heard more.\n\nMARK has five parallel meanings:\n• Marketing — the main area the project focuses on\n• tradeMARK (trademark / brand) — students help people and projects build their brand\n• Mark — every project and every output leaves a mark in the region\n• Grade — as an evaluation and recognition of the results of work\n• Target (from the English word mark = target, goal) — the project has a clear goal: to help the region through the creative work of young people\n\nThe project focuses on marketing, media, content creation, and brand building for craftspeople, entrepreneurs, municipalities and projects from the Gemer region.\n\nStudents will create brands — logos, visual identities, websites and marketing communication.\n\nA mark is more than a grade. Practice is more than theory.',
+
+    nasaMisiaDesc: 'The mission of the GemMARK project is to connect the needs of the Gemer region with the energy, creativity and enthusiasm of young people, and to create a space where learning naturally connects with practice.\n\nThe project enables young people to gain real experience in marketing, media and creative production through working on real projects for craftspeople, entrepreneurs, municipalities and cultural organisations in the region.\n\nGemMARK believes that young people from Gemer are full of talent, energy and creativity — and that they can be the ones who change how the region is perceived from the inside and outside.\n\nThe project aims to be a place where a young person can learn to work with professional tools, where they can make mistakes without fear, where they learn to present their work, communicate with clients and build their portfolio.\n\nThe project\'s goal is to raise a generation of skilled, confident and collaborative young people who will be able to create quality projects and actively contribute to making Gemer a place where they want to live, create and work.',
+
+    akoToFungujeDesc: 'GemMARK works as a creative studio in which students work together with mentors on real projects for real clients from the Gemer region.\n\nStudent → Mentor → Team → Client → Project → Output → Portfolio → Experience\n\nStudents learn graphic design, photography, video, web creation, social media management, moderation and marketing strategies directly in practice.',
+
+    akoSaSNamiSpojisDesc: 'If you have a project, idea, business, event, product or service and want help with presentation, marketing, photography, video, a website or social media, feel free to get in touch.\n\nAddress: Akademika Hronca 11, Rožňava\nEmail: info@gemmark.sk\nPhone: 0917 974 801\n\nOpening hours:\nMonday – Saturday\n13:00 – 19:00',
+
+    ktoZaTymDesc: 'The GemMARK project was created in response to a series of public discussions called "We Are Looking for Gemer", during which it became clear that the region lacks quality marketing, media and communication. From these discussions came the idea to create a place where young people can learn marketing and creative skills through practice — while directly helping the region.\n\nThe team behind the project consists of a group of regional experts, educators, cultural organisers and digital specialists who are united by a common passion and commitment to the Gemer region.',
+
+    coKedyAKdeDesc: 'What, when and where does things happen with us?\n\nApproximately once every 2–3 months we organise joint events at which we present what we have been working on and connect young people with entrepreneurs, craftspeople, municipalities and the public.\n\nThese events are open to the public and serve as a space where students can show their work, receive feedback and make new contacts.\n\nAt the events we present:\n• project presentations\n• photo exhibitions\n• video and short film screenings\n• website presentations\n• live podcast recording\n• meetings with entrepreneurs and craftspeople\n\nIn addition to larger events, we organise regular workshops, training sessions and mentoring meetings directly at the GemMARK premises at Akademika Hronca 11 in Rožňava.',
+
+    logoVizualnaIdentita: 'Logos and visual identity',
+    weboveStranky: 'Websites',
+    fotografia: 'Photography',
+    videoStrih: 'Video and editing',
+    spravaSOcSieti: 'Social media management',
+    plagatyLetaky: 'Posters, leaflets, brochures',
+    copywriting: 'Articles and copy / Copywriting',
+    podcasty: 'Podcasts and interviews',
+
+    sections: {
+      'o-projekte': 'What is GemMARK?',
+      'preco-gemmark': 'Why GemMARK?',
+      'preco-nazov-gemmark': 'Why the name GemMARK?',
+      'nasa-misia': 'What is our mission?',
+      'nase-sluzby': 'What do we create and for how much?',
+      'portfolio': 'Who have we already worked for?',
+      'kto-za-tym': 'Who is behind GemMARK?',
+      'ako-to-funguje': 'How does it work?',
+      'ako-sa-spojis': 'How to get in touch?',
+      'co-kedy-kde': 'What, when and where?',
+    },
+  },
 } as const;
 
-export type Language = 'sk' | 'hu';
+export type Language = 'sk' | 'hu' | 'en';
 export type TranslationKey = keyof typeof translations.sk;

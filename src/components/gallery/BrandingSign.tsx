@@ -155,7 +155,7 @@ export default function BrandingSign({ position, rotation = [0, 0, 0] }: Brandin
               id: 'o-projekte',
               title: 'Čo je GemMARK?',
               description: 'GemMARK je miesto, kde sa mladí ľudia učia marketing praxou a zároveň pomáhajú regiónu, aby o ňom bolo viac vidieť a počuť.\n\nGemMARK – Student Media Lab je regionálne, komunitné, kreatívne a vzdelávacie centrum zamerané na prepájanie potrieb regiónu Gemer v oblasti marketingu, médií a prezentácie s prirodzeným záujmom mladých ľudí o kreativitu, digitálnu tvorbu, fotografiu, video, hovorené slovo, sociálne siete a moderné komunikačné nástroje.',
-              image: '/images/branding/gemmark-badge.jpg',
+              image: '/images/branding/gemmark-badge-new.png',
             });
           }}
           onPointerEnter={() => { setBtnHovered(true); document.body.style.cursor = 'pointer'; }}

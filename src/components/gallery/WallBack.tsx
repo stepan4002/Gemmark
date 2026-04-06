@@ -34,7 +34,7 @@ export default function WallBack() {
       >
         <span style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
@@ -49,14 +49,14 @@ export default function WallBack() {
         position={[LEFT_WALL_X + 0.06, FRAME_Y, LEFT_WALL_FRAME_Z]}
         rotation={LEFT_WALL_ROT}
         size={[6.0, 4.5]}
-        image="/images/branding/gemmark-badge.jpg"
+        image="/images/branding/gemmark-badge-new.png"
         label={t.sections['preco-nazov-gemmark']}
         panelData={{
           type: 'info',
           id: 'preco-nazov-gemmark',
           title: t.sections['preco-nazov-gemmark'],
           description: t.precoGemmarkDesc,
-          image: '/images/branding/gemmark-badge.jpg',
+          image: '/images/branding/gemmark-badge-new.png',
         }}
       />
     </group>

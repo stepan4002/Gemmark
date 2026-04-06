@@ -97,8 +97,8 @@ export default function Navbar() {
 
       {/* Language switcher */}
       <button
-        onClick={() => setLanguage(language === 'sk' ? 'hu' : 'sk')}
-        aria-label={`Switch to ${language === 'sk' ? 'Hungarian' : 'Slovak'}`}
+        onClick={() => setLanguage(language === 'sk' ? 'hu' : language === 'hu' ? 'en' : 'sk')}
+        aria-label={`Switch to ${language === 'sk' ? 'Hungarian' : language === 'hu' ? 'English' : 'Slovak'}`}
         style={{
           padding: '0 12px',
           height: '44px',

@@ -1,25 +1,27 @@
 'use client';
 
-import { Suspense } from 'react';
-import { useTexture, Edges } from '@react-three/drei';
+import { Edges } from '@react-three/drei';
 import {
   WALL_HEIGHT,
-  WALL_A_Z,
-  CONNECT_WALL_A_X,
+  ROOM_W,
+  ROOM_D,
 } from './Room';
 
 // ─── Bench component ──────────────────────────────────────────────────────────
+// Original dimensions × 1.5 scale factor
 function Bench({ position, backrestSide = 1 }: { position: [number, number, number]; backrestSide?: -1 | 1 }) {
-  const seatThick = 0.06;
-  const seatW = 1.0;
-  const seatD = 3.0;
-  const legH = 0.45;
-  const legW = 0.08;
+  const seatThick = 0.09;   // 0.06 × 1.5
+  const seatW = 1.5;        // 1.0 × 1.5
+  const seatD = 4.5;        // 3.0 × 1.5
+  const legH = 0.675;       // 0.45 × 1.5
+  const legW = 0.12;        // 0.08 × 1.5
   const seatY = legH;
 
-  const backH = 0.6;
-  const backThick = 0.06;
-  const backX = backrestSide * (seatW / 2 + backThick / 2);
+  const backH = 0.9;        // 0.6 × 1.5
+  const backThick = 0.09;   // 0.06 × 1.5
+  // Backrest sits on the Z-axis side (benches face each other along X)
+  // backrestSide now controls Z position, benches face X
+  const backZ = backrestSide * (seatD / 2 + backThick / 2);
 
   return (
     <group position={position}>
@@ -30,8 +32,8 @@ function Bench({ position, backrestSide = 1 }: { position: [number, number, numb
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>
       {/* Four legs */}
-      {([-seatD / 2 + 0.2, seatD / 2 - 0.2] as number[]).flatMap((z) =>
-        ([-seatW / 2 + 0.07, seatW / 2 - 0.07] as number[]).map((x, j) => (
+      {([-seatD / 2 + 0.3, seatD / 2 - 0.3] as number[]).flatMap((z) =>
+        ([-seatW / 2 + 0.105, seatW / 2 - 0.105] as number[]).map((x, j) => (
           <mesh key={`leg-${z}-${j}`} position={[x, legH / 2, z]}>
             <boxGeometry args={[legW, legH, legW]} />
             <meshStandardMaterial color="#f0f0ec" />
@@ -39,9 +41,9 @@ function Bench({ position, backrestSide = 1 }: { position: [number, number, numb
           </mesh>
         ))
       )}
-      {/* Backrest */}
-      <mesh position={[backX, seatY + seatThick + backH / 2, 0]}>
-        <boxGeometry args={[backThick, backH, seatD]} />
+      {/* Backrest — along Z face */}
+      <mesh position={[0, seatY + seatThick + backH / 2, backZ]}>
+        <boxGeometry args={[seatW, backH, backThick]} />
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>
@@ -50,24 +52,25 @@ function Bench({ position, backrestSide = 1 }: { position: [number, number, numb
 }
 
 // ─── Table component ──────────────────────────────────────────────────────────
+// Original dimensions × 1.5 scale factor
 function Table({ position }: { position: [number, number, number] }) {
-  const topH = 0.65;
-  const topW = 1.8;
-  const topD = 2.6;
-  const legH = 0.65;
-  const legW = 0.08;
+  const topH = 0.975;       // 0.65 × 1.5
+  const topW = 2.7;         // 1.8 × 1.5
+  const topD = 3.9;         // 2.6 × 1.5
+  const legH = 0.975;       // 0.65 × 1.5
+  const legW = 0.12;        // 0.08 × 1.5
 
   return (
     <group position={position}>
       {/* Table top */}
-      <mesh position={[0, topH + 0.03, 0]}>
-        <boxGeometry args={[topW, 0.06, topD]} />
+      <mesh position={[0, topH + 0.045, 0]}>
+        <boxGeometry args={[topW, 0.09, topD]} />
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>
       {/* Four legs */}
-      {([-topD / 2 + 0.15, topD / 2 - 0.15] as number[]).flatMap((z) =>
-        ([-topW / 2 + 0.1, topW / 2 - 0.1] as number[]).map((x, j) => (
+      {([-topD / 2 + 0.225, topD / 2 - 0.225] as number[]).flatMap((z) =>
+        ([-topW / 2 + 0.15, topW / 2 - 0.15] as number[]).map((x, j) => (
           <mesh key={`tleg-${z}-${j}`} position={[x, legH / 2, z]}>
             <boxGeometry args={[legW, legH, legW]} />
             <meshStandardMaterial color="#f0f0ec" />
@@ -117,49 +120,41 @@ function Plant({ position }: { position: [number, number, number] }) {
   );
 }
 
-// ─── Carpet component (uses texture — isolated Suspense boundary) ─────────────
-function Carpet({ position }: { position: [number, number, number] }) {
-  const tex = useTexture('/images/team/team-collab.jpg');
-  return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={position}>
-      {/* 50% larger than original [7, 5] → [10.5, 7.5] */}
-      <planeGeometry args={[10.5, 7.5]} />
-      <meshStandardMaterial map={tex} />
-    </mesh>
-  );
-}
-
 // ─── Main Furniture ───────────────────────────────────────────────────────────
-// Section 1: Z = 30 (front) to Z = WALL_A_Z = 12. Centre Z = 21. Centre X = 0.
-// Table+benches+carpet centred at approximately X=0, Z=20.
+// Table+benches IN FRONT of Wall C (Čo je GemMARK).
+// Wall C is at X=0, Z=3. Place furniture at X=0, Z=6 (in front, toward entrance).
+// Benches are rotated 90°: they now run along the X axis (seatD along X),
+// facing each other across the table along the Z axis.
 //
-// Plant at the corner where the connecting wall meets Wall A:
-// CONNECT_WALL_A_X = -4, WALL_A_Z = 12. Offset slightly inward from the corner.
+// Plant in the back-left corner: [-ROOM_W/2 + 1.5, 0, -ROOM_D/2 + 1.5]
 export default function Furniture() {
-  const centreX = 0;   // centre of room width
-  const centreZ = 20;  // centre of Section 1 (between Z=30 and Z=12)
+  // Furniture centred in front of Wall C
+  const centreX = 0;
+  const centreZ = 6;  // in front of Wall C (Z=3), toward entrance
 
-  // Plant position: at the corner of connecting wall and Wall A, on the camera-facing side
-  // Corner is at X=-4, Z=12. Camera sees from +X/+Z direction.
-  // So plant goes slightly toward +X (into the room) and +Z (toward entrance) from the corner.
-  const plantX = CONNECT_WALL_A_X + 0.8;
-  const plantZ = WALL_A_Z + 0.8;
+  // Plant position: back-left corner of the room
+  const plantX = -ROOM_W / 2 + 1.5;   // ≈ -8.5
+  const plantZ = -ROOM_D / 2 + 1.5;   // ≈ -28.5
+
+  // Bench offset along Z (benches face each other across the table on Z axis)
+  // Table depth scaled = 3.9, bench seat depth scaled = 4.5
+  // Place benches ±3.2 units along Z from centre
+  const benchOffsetZ = 3.2;
 
   return (
     <group>
-      {/* ── CARPET/RUG with team photo texture (isolated Suspense) ──── */}
-      <Suspense fallback={null}>
-        <Carpet position={[centreX, 0.012, centreZ]} />
-      </Suspense>
-
-      {/* ── SEATING ARRANGEMENT centred in Section 1 ─────────────────── */}
-      {/* Left bench: backrest faces away from table (toward -X) */}
-      <Bench position={[centreX - 2, 0, centreZ]} backrestSide={-1} />
+      {/* ── TABLE centred in front of Wall C ─────────────────────────── */}
       <Table position={[centreX, 0, centreZ]} />
-      {/* Right bench: backrest faces away from table (toward +X) */}
-      <Bench position={[centreX + 2, 0, centreZ]} backrestSide={1} />
 
-      {/* ── PLANT on the left-hand side of Wall A ────────────────────── */}
+      {/* ── BENCH on the -Z side (facing +Z, toward Wall C) ─────────── */}
+      {/* backrestSide=-1 puts backrest on -Z face, bench faces toward table */}
+      <Bench position={[centreX, 0, centreZ - benchOffsetZ]} backrestSide={-1} />
+
+      {/* ── BENCH on the +Z side (facing -Z, toward Wall C) ─────────── */}
+      {/* backrestSide=1 puts backrest on +Z face, bench faces toward table */}
+      <Bench position={[centreX, 0, centreZ + benchOffsetZ]} backrestSide={1} />
+
+      {/* ── PLANT in the back-left corner of the room ────────────────── */}
       <Plant position={[plantX, 0, plantZ]} />
     </group>
   );

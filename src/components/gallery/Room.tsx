@@ -20,16 +20,15 @@ export const WALL_H = 7.5;
 // ─── Divider walls ────────────────────────────────────────────────────────────
 // Wall A runs parallel to X-axis (left→right), perpendicular to the room's depth.
 // Wall A connects to the RIGHT wall and leaves a gap on the LEFT side.
-export const WALL_A_Z = 12;          // Z position of Wall A centre line (moved forward from 10)
-export const WALL_B_Z = -8;          // Z position of Wall B centre line (moved significantly forward from -14)
-export const DIVIDER_WIDTH = 14;     // extends from right wall (~70% of room width)
-export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 6 — gap on left side
-// X centre of each divider: starts at right wall edge (X=+10), extends DIVIDER_WIDTH units to the left
-// Right edge at X=10, left edge at X=10-14=-4, centre X=10-7=3
-export const DIVIDER_X = ROOM_W / 2 - DIVIDER_WIDTH / 2; // = 10 - 7 = 3
+// Shortened to 8 units (from 14) since only 2 service frames are needed.
+export const WALL_A_Z = 12;          // Z position of Wall A centre line
+export const WALL_B_Z = -8;          // Z position of Wall B centre line
+export const DIVIDER_WIDTH = 8;      // shortened — only 2 service frames needed
+export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 12 — larger gap on left side
+// X centre: right edge at X=10, extends DIVIDER_WIDTH units left → left edge at X=2, centre X=6
+export const DIVIDER_X = ROOM_W / 2 - DIVIDER_WIDTH / 2; // = 10 - 4 = 6
 
 // ─── Staircase ────────────────────────────────────────────────────────────────
-// Positioned at center-right of the front opening
 export const STAIR_X = 2;            // center-right
 export const STAIR_Z = ROOM_D / 2;  // right at the front edge
 
@@ -42,38 +41,36 @@ export const MID_WALL_Z = WALL_A_Z;
 export const MID_WALL_WIDTH = DIVIDER_WIDTH;
 export const MID_WALL_X_OFFSET = DIVIDER_X;
 // Wall C — freestanding, rotated 90 degrees, runs ALONG Z axis (front-to-back)
-// Not connected to any wall, sits freely in the middle of the room
-export const WALL_C_Z = 3;           // centre Z position (moved forward from -1)
+export const WALL_C_Z = 3;           // centre Z position
 export const WALL_C_LENGTH = 9;      // length along Z axis (depth)
 export const WALL_C_X = 0;           // centered in room
 
 // Wall B aliases
 export const WALL_B_Z_POS = WALL_B_Z;
 
-// ─── Split "Ako to funguje / Ako sa s nami spojíš" wall ───────────────────────
-// Two short wall segments running along X axis, both at HOW_WALL_Z.
-// A gap between them separates left (Ako to funguje) and right (Ako sa s nami spojíš).
-export const HOW_WALL_LENGTH = 8;    // kept for legacy reference
-export const HOW_WALL_X = -ROOM_W / 2 + HOW_WALL_LENGTH / 2; // = -6 (legacy)
-export const HOW_WALL_Z = -16;       // moved forward from -20
-
-export const HOW_WALL_LEFT_X = -7;   // left segment centre
-export const HOW_WALL_RIGHT_X = -1;  // right segment centre (kept for legacy; right segment removed from geometry)
-export const HOW_WALL_SEGMENT_W = 7; // left segment width (increased from 5 to 7)
+// ─── HOW_WALL constants — kept for legacy exports only ───────────────────────
+// HOW_WALL left segment is REMOVED from geometry (WallMission moved to floor).
+export const HOW_WALL_LENGTH = 8;
+export const HOW_WALL_X = -ROOM_W / 2 + HOW_WALL_LENGTH / 2;
+export const HOW_WALL_Z = -16;
+export const HOW_WALL_LEFT_X = -7;
+export const HOW_WALL_RIGHT_X = -1;
+export const HOW_WALL_SEGMENT_W = 7;
 
 // ─── Wall B split into two half-segments ─────────────────────────────────────
 // Wall B LEFT half: "Ako to funguje?" (process)
-export const WALL_B_LEFT_X = DIVIDER_X - DIVIDER_WIDTH / 4;   // left quarter centre
-export const WALL_B_LEFT_W = DIVIDER_WIDTH / 2 - 0.3;         // half width minus gap
+export const WALL_B_LEFT_X = DIVIDER_X - DIVIDER_WIDTH / 4;   // = 6 - 2 = 4
+export const WALL_B_LEFT_W = DIVIDER_WIDTH / 2 - 0.3;         // = 4 - 0.3 = 3.7
 // Wall B RIGHT half: "Ako sa s nami spojíš?" (contact)
-export const WALL_B_RIGHT_X = DIVIDER_X + DIVIDER_WIDTH / 4;  // right quarter centre
-export const WALL_B_RIGHT_W = DIVIDER_WIDTH / 2 - 0.3;        // half width minus gap
+export const WALL_B_RIGHT_X = DIVIDER_X + DIVIDER_WIDTH / 4;  // = 6 + 2 = 8
+export const WALL_B_RIGHT_W = DIVIDER_WIDTH / 2 - 0.3;        // = 3.7
 
 // ─── Connecting wall from Wall A left end, going FORWARD (toward entrance) ───
-// This wall carries "Čo, kedy a kde sa u nás deje?" content
-export const CONNECT_WALL_A_X = DIVIDER_X - DIVIDER_WIDTH / 2; // X = -4
+// This wall carries "Čo, kedy a kde sa u nás deje?" content.
+// Left end of Wall A: DIVIDER_X - DIVIDER_WIDTH/2 = 6 - 4 = 2
+export const CONNECT_WALL_A_X = DIVIDER_X - DIVIDER_WIDTH / 2; // X = 2
 export const CONNECT_WALL_A_Z_START = WALL_A_Z;                 // Z = 12
-export const CONNECT_WALL_A_LENGTH = 8;                          // extends 8 units FORWARD (toward Z=20)
+export const CONNECT_WALL_A_LENGTH = 8;                          // extends 8 units FORWARD
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function WhiteBox({
@@ -103,7 +100,6 @@ function Staircase() {
 
   return (
     <group position={[STAIR_X, 0, STAIR_Z]}>
-      {/* Steps: step 0 is at floor level, each subsequent step is lower and further out */}
       {Array.from({ length: stepCount }).map((_, i) => (
         <mesh
           key={`step-${i}`}
@@ -115,21 +111,16 @@ function Staircase() {
         </mesh>
       ))}
 
-      {/* Left railing post */}
       <mesh position={[-stairWidth / 2 - 0.04, 0.5, 0]}>
         <boxGeometry args={[0.06, 1.0 + stepCount * stepH, 0.06]} />
         <meshStandardMaterial color={WALL_COLOR} />
         <Edges color={EDGE_COLOR} threshold={1} />
       </mesh>
-
-      {/* Right railing post */}
       <mesh position={[stairWidth / 2 + 0.04, 0.5, 0]}>
         <boxGeometry args={[0.06, 1.0 + stepCount * stepH, 0.06]} />
         <meshStandardMaterial color={WALL_COLOR} />
         <Edges color={EDGE_COLOR} threshold={1} />
       </mesh>
-
-      {/* Far railing posts (at deepest step) */}
       <mesh position={[-stairWidth / 2 - 0.04, -(stepCount * stepH) + 0.5, stepCount * stepD]}>
         <boxGeometry args={[0.06, 1.0, 0.06]} />
         <meshStandardMaterial color={WALL_COLOR} />
@@ -140,8 +131,6 @@ function Staircase() {
         <meshStandardMaterial color={WALL_COLOR} />
         <Edges color={EDGE_COLOR} threshold={1} />
       </mesh>
-
-      {/* Spindles along left rail */}
       {Array.from({ length: stepCount * 2 }).map((_, i) => (
         <mesh
           key={`spindle-l-${i}`}
@@ -211,16 +200,14 @@ export default function Room() {
 
       {/* ── NO FRONT WALL — open entrance ────────────────────────────────── */}
 
-      {/* ── WALL A — 1st divider, connects to RIGHT wall, gap on left ──────── */}
-      {/* Centre X = DIVIDER_X = 3, right edge at X=10 touching right boundary */}
+      {/* ── WALL A — 1st divider, shortened to 8 units, connects to RIGHT wall ── */}
+      {/* Centre X = DIVIDER_X = 6, right edge at X=10 touching right boundary */}
       <WhiteBox
         pos={[DIVIDER_X, WALL_H / 2, WALL_A_Z]}
         size={[DIVIDER_WIDTH, WALL_H, T]}
       />
 
       {/* ── WALL C — freestanding, ROTATED 90°, runs along Z axis ────────── */}
-      {/* Sits in the middle of the room, running front-to-back (along Z). */}
-      {/* size: [T, WALL_H, WALL_C_LENGTH] — thin along X, deep along Z */}
       <WhiteBox
         pos={[WALL_C_X, WALL_H / 2, WALL_C_Z]}
         size={[T, WALL_H, WALL_C_LENGTH]}
@@ -238,13 +225,7 @@ export default function Room() {
         size={[WALL_B_RIGHT_W, WALL_H, T]}
       />
 
-      {/* ── EVENTS WALL removed — content moved to connecting wall ────────── */}
-
-      {/* ── HOW-IT-WORKS WALL — left segment only at HOW_WALL_Z ─────────── */}
-      <WhiteBox
-        pos={[HOW_WALL_LEFT_X, WALL_H / 2, HOW_WALL_Z]}
-        size={[HOW_WALL_SEGMENT_W, WALL_H, T]}
-      />
+      {/* ── HOW_WALL left segment REMOVED — WallMission moved to floor ────── */}
 
       {/* ── CONNECTING WALL from Wall A left end, running FORWARD toward entrance ── */}
       <WhiteBox
@@ -265,9 +246,8 @@ export default function Room() {
         <meshStandardMaterial color={WALL_COLOR} />
         <Edges color={EDGE_COLOR} threshold={1} />
       </mesh>
-      {/* No right wall ceiling strip — right wall removed */}
 
-      {/* ── FLOOR EDGE LINES — thin lines matching wall edge thickness ───── */}
+      {/* ── FLOOR EDGE LINES ─────────────────────────────────────────────── */}
       {/* Left wall base */}
       <mesh position={[-halfW + T / 2 + 0.02, 0.02, 0]}>
         <boxGeometry args={[0.03, 0.04, ROOM_D]} />
@@ -305,7 +285,7 @@ export default function Room() {
         <boxGeometry args={[WALL_B_RIGHT_W, 0.04, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall C base — both sides */}
+      {/* Wall C base — both sides (along X since Wall C runs along Z) */}
       <mesh position={[WALL_C_X + T / 2 + 0.02, 0.02, WALL_C_Z]}>
         <boxGeometry args={[0.03, 0.04, WALL_C_LENGTH]} />
         <meshStandardMaterial color="#1a1a1a" />
@@ -314,17 +294,8 @@ export default function Room() {
         <boxGeometry args={[0.03, 0.04, WALL_C_LENGTH]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Events wall removed — no base lines needed */}
-      {/* HOW_WALL left segment base — both sides */}
-      <mesh position={[HOW_WALL_LEFT_X, 0.02, HOW_WALL_Z + T / 2 + 0.02]}>
-        <boxGeometry args={[HOW_WALL_SEGMENT_W, 0.04, 0.03]} />
-        <meshStandardMaterial color="#1a1a1a" />
-      </mesh>
-      <mesh position={[HOW_WALL_LEFT_X, 0.02, HOW_WALL_Z - T / 2 - 0.02]}>
-        <boxGeometry args={[HOW_WALL_SEGMENT_W, 0.04, 0.03]} />
-        <meshStandardMaterial color="#1a1a1a" />
-      </mesh>
-      {/* Connecting wall base — both sides (now goes FORWARD from Wall A) */}
+      {/* HOW_WALL left segment base — REMOVED (WallMission on floor now) */}
+      {/* Connecting wall base — both sides */}
       <mesh position={[CONNECT_WALL_A_X + T / 2 + 0.02, 0.02, CONNECT_WALL_A_Z_START + CONNECT_WALL_A_LENGTH / 2]}>
         <boxGeometry args={[0.03, 0.04, CONNECT_WALL_A_LENGTH]} />
         <meshStandardMaterial color="#1a1a1a" />
@@ -344,7 +315,7 @@ export default function Room() {
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
 
-      {/* ── CEILING EDGE LINES — thin, matching floor base lines ──────────── */}
+      {/* ── CEILING EDGE LINES ────────────────────────────────────────────── */}
       {/* Left wall top */}
       <mesh position={[-halfW, WALL_H, 0]}>
         <boxGeometry args={[0.03, 0.03, ROOM_D]} />
@@ -370,20 +341,21 @@ export default function Room() {
         <boxGeometry args={[WALL_B_RIGHT_W, 0.03, 0.03]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* HOW_WALL left segment top */}
-      <mesh position={[HOW_WALL_LEFT_X, WALL_H, HOW_WALL_Z]}>
-        <boxGeometry args={[HOW_WALL_SEGMENT_W, 0.03, 0.03]} />
-        <meshStandardMaterial color="#1a1a1a" />
-      </mesh>
+      {/* HOW_WALL left segment top — REMOVED */}
       {/* Connecting wall top (goes FORWARD) */}
       <mesh position={[CONNECT_WALL_A_X, WALL_H, CONNECT_WALL_A_Z_START + CONNECT_WALL_A_LENGTH / 2]}>
         <boxGeometry args={[0.03, 0.03, CONNECT_WALL_A_LENGTH]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
 
-      {/* ── VERTICAL CORNER LINES — thin, matching edge thickness ────────── */}
+      {/* ── VERTICAL CORNER LINES ─────────────────────────────────────────── */}
       {/* Back wall + left wall corner */}
       <mesh position={[-halfW, WALL_H / 2, -halfD]}>
+        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
+      {/* Back wall + right wall corner (open but mark floor edge) */}
+      <mesh position={[halfW, WALL_H / 2, -halfD]}>
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
@@ -392,7 +364,7 @@ export default function Room() {
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall A right end */}
+      {/* Wall A right end (connects to right room wall) */}
       <mesh position={[DIVIDER_X + DIVIDER_WIDTH / 2, WALL_H / 2, WALL_A_Z]}>
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
@@ -415,12 +387,12 @@ export default function Room() {
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* HOW_WALL left segment ends */}
-      <mesh position={[HOW_WALL_LEFT_X - HOW_WALL_SEGMENT_W / 2, WALL_H / 2, HOW_WALL_Z]}>
+      {/* Wall C ends (top and bottom along Z since Wall C runs along Z axis) */}
+      <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z - WALL_C_LENGTH / 2]}>
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      <mesh position={[HOW_WALL_LEFT_X + HOW_WALL_SEGMENT_W / 2, WALL_H / 2, HOW_WALL_Z]}>
+      <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z + WALL_C_LENGTH / 2]}>
         <boxGeometry args={[0.04, WALL_H, 0.04]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>

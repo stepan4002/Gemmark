@@ -59,8 +59,8 @@ interface GalleryState {
   setHoveredFrame: (id: string | null) => void;
 
   // Language
-  language: 'sk' | 'hu';
-  setLanguage: (lang: 'sk' | 'hu') => void;
+  language: 'sk' | 'hu' | 'en';
+  setLanguage: (lang: 'sk' | 'hu' | 'en') => void;
 }
 
 export const useGalleryStore = create<GalleryState>((set) => ({
@@ -90,7 +90,7 @@ export const useGalleryStore = create<GalleryState>((set) => ({
   hoveredFrame: null,
   setHoveredFrame: (id) => set({ hoveredFrame: id }),
 
-  language: (typeof window !== 'undefined' && (localStorage.getItem('gemmark-lang') as 'sk' | 'hu')) || 'sk',
+  language: (typeof window !== 'undefined' && (localStorage.getItem('gemmark-lang') as 'sk' | 'hu' | 'en')) || 'sk',
   setLanguage: (lang) => {
     if (typeof window !== 'undefined') localStorage.setItem('gemmark-lang', lang);
     set({ language: lang });

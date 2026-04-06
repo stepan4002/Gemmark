@@ -98,12 +98,13 @@ export default function WallTeam() {
       >
         <span style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           whiteSpace: 'nowrap',
           textTransform: 'uppercase',
+          maxWidth: '400px',
         }}>
           {t.sections['kto-za-tym']}
         </span>

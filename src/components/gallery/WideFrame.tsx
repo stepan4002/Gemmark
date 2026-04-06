@@ -37,7 +37,7 @@ export default function WideFrame({
   const openPanel = useGalleryStore((s) => s.openPanel);
   const setHoveredFrame = useGalleryStore((s) => s.setHoveredFrame);
 
-  const texture = useTexture(image || '/images/branding/gemmark-logo.jpg');
+  const texture = useTexture(image || '/images/branding/gemmark-logo-new.png');
 
   // Smooth lift upward on hover (positive Y)
   useFrame(() => {

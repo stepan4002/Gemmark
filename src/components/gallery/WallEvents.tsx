@@ -33,14 +33,14 @@ export default function WallEvents() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '16px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
           lineHeight: 1.3,
-          maxWidth: '140px',
+          maxWidth: '400px',
         }}>
           {t.sections['co-kedy-kde']}
         </div>
@@ -51,14 +51,14 @@ export default function WallEvents() {
         position={[FACE_X + 0.06, WALL_HEIGHT * 0.52, CENTER_Z]}
         rotation={FACE_ROT}
         size={[5.5, 4.0]}
-        image="/images/branding/gemmark-logo.jpg"
+        image="/images/branding/conference.jpg"
         label={t.sections['co-kedy-kde']}
         panelData={{
           type: 'info',
           id: 'co-kedy-kde',
           title: t.sections['co-kedy-kde'],
           description: t.coKedyAKdeDesc,
-          image: '/images/branding/gemmark-logo.jpg',
+          image: '/images/branding/conference.jpg',
         }}
       />
     </group>

@@ -34,7 +34,7 @@ const FRAME_ROT: [number, number, number] = [0, Math.PI / 2, 0];
 function BobbingIcon() {
   const groupRef = useRef<import('three').Group>(null);
   const [hovered, setHovered] = useState(false);
-  const openFullPageOverlay = useGalleryStore((s) => s.openFullPageOverlay);
+  const openPanel = useGalleryStore((s) => s.openPanel);
   const { t } = useTranslation();
   const timer = useRef(0);
 
@@ -55,10 +55,12 @@ function BobbingIcon() {
       rotation={ROT_RIGHT}
       onClick={(e) => {
         e.stopPropagation();
-        openFullPageOverlay({
+        openPanel({
+          type: 'info',
           id: 'o-projekte',
           title: t.sections['o-projekte'],
-          content: t.coJeGemmarkFull,
+          description: t.coJeGemmarkDesc,
+          image: '/images/branding/gemmark-logo-new.png',
         });
       }}
       onPointerEnter={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer'; }}
@@ -92,7 +94,7 @@ function BobbingIcon() {
 
 export default function WallOProjekte() {
   const { t } = useTranslation();
-  const openFullPageOverlay = useGalleryStore((s) => s.openFullPageOverlay);
+  const openPanel = useGalleryStore((s) => s.openPanel);
 
   return (
     <group>
@@ -105,7 +107,7 @@ export default function WallOProjekte() {
       >
         <span style={{
           color: '#1a1a1a',
-          fontSize: '18px',
+          fontSize: '28px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '2px',
@@ -121,18 +123,20 @@ export default function WallOProjekte() {
         position={[FACE_X + 0.06, WALL_HEIGHT * 0.52, WALL_C_Z]}
         rotation={FRAME_ROT}
         size={[7, 4.5]}
-        image="/images/branding/gemmark-logo.jpg"
+        image="/images/branding/gemmark-logo-new.png"
         label={t.sections['o-projekte']}
         onClickOverride={() =>
-          openFullPageOverlay({
+          openPanel({
+            type: 'info',
             id: 'o-projekte',
             title: t.sections['o-projekte'],
-            content: t.coJeGemmarkFull,
+            description: t.coJeGemmarkDesc,
+            image: '/images/branding/gemmark-logo-new.png',
           })
         }
       />
 
-      {/* Bobbing orange icon below the frame — opens the same overlay */}
+      {/* Bobbing orange icon below the frame — opens the same panel */}
       <BobbingIcon />
     </group>
   );
