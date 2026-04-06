@@ -92,9 +92,10 @@ export default function WallMission() {
           <meshStandardMaterial transparent opacity={0} side={THREE.DoubleSide} />
         </mesh>
 
-        {/* Section label — 3D Text so it lies flat with the frame */}
+        {/* Section label — 3D Text, rotation locked to parent */}
         <Text
           position={[0, 2.8, 0.04]}
+          rotation={[0, 0, 0]}
           fontSize={0.9}
           color="#999999"
           anchorX="center"
@@ -108,11 +109,12 @@ export default function WallMission() {
           {t.sections['nasa-misia'].toUpperCase()}
         </Text>
 
-        {/* Large display text — 3D Text for proper floor alignment */}
+        {/* Large display text — rotation locked to parent so it lies flat */}
         {firstWords.map((word, i) => (
           <Text
             key={i}
             position={[0, 1.2 - i * 1.4, 0.04]}
+            rotation={[0, 0, 0]}
             fontSize={1.5}
             color="#1a1a1a"
             anchorX="center"
@@ -126,6 +128,7 @@ export default function WallMission() {
         ))}
         <Text
           position={[0, 1.2 - firstWords.length * 1.4, 0.04]}
+          rotation={[0, 0, 0]}
           fontSize={1.5}
           color="#1a1a1a"
           anchorX="center"
@@ -137,9 +140,10 @@ export default function WallMission() {
           {lastWord}.
         </Text>
 
-        {/* Click hint */}
+        {/* Click hint — rotation locked to parent */}
         <Text
           position={[0, -3.0, 0.04]}
+          rotation={[0, 0, 0]}
           fontSize={0.4}
           color="#999999"
           anchorX="center"
