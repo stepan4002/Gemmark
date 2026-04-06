@@ -34,9 +34,12 @@ export default function WallMission() {
     );
   });
 
-  const missionWords = t.tvorimeObrazGemera.replace('.', '').split(' ');
-  const lastWord = missionWords[missionWords.length - 1];
-  const firstWords = missionWords.slice(0, -1);
+  // Split text into exactly 2 lines at the midpoint
+  const fullText = t.tvorimeObrazGemera.replace('.', '').trim();
+  const words = fullText.split(' ');
+  const mid = Math.ceil(words.length / 2);
+  const line1 = words.slice(0, mid).join(' ');
+  const line2 = words.slice(mid).join(' ');
 
   const fw = FRAME_W + BORDER * 2;
   const fh = FRAME_H + BORDER * 2;
@@ -109,25 +112,22 @@ export default function WallMission() {
           {t.sections['nasa-misia'].toUpperCase()}
         </Text>
 
-        {/* Large display text — rotation locked to parent so it lies flat */}
-        {firstWords.map((word, i) => (
-          <Text
-            key={i}
-            position={[0, 1.2 - i * 1.4, 0.04]}
-            rotation={[0, 0, 0]}
-            fontSize={1.5}
-            color="#1a1a1a"
-            anchorX="center"
-            anchorY="middle"
-            fontWeight={300}
-            letterSpacing={-0.02}
-            raycast={() => null}
-          >
-            {word}
-          </Text>
-        ))}
+        {/* Large display text — exactly 2 lines, centered */}
         <Text
-          position={[0, 1.2 - firstWords.length * 1.4, 0.04]}
+          position={[0, 0.8, 0.04]}
+          rotation={[0, 0, 0]}
+          fontSize={1.5}
+          color="#1a1a1a"
+          anchorX="center"
+          anchorY="middle"
+          fontWeight={300}
+          letterSpacing={-0.02}
+          raycast={() => null}
+        >
+          {line1}
+        </Text>
+        <Text
+          position={[0, -0.8, 0.04]}
           rotation={[0, 0, 0]}
           fontSize={1.5}
           color="#1a1a1a"
@@ -137,7 +137,7 @@ export default function WallMission() {
           letterSpacing={-0.02}
           raycast={() => null}
         >
-          {lastWord}
+          {line2}
         </Text>
 
         {/* Click hint — rotation locked to parent */}
