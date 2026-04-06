@@ -47,6 +47,16 @@ function Bench({ position, backrestSide = 1, rotateY = 0 }: { position: [number,
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
       </mesh>
+      {/* Crease line where seat meets backrest */}
+      <mesh position={[0, seatY + seatThick, backZ - backrestSide * backThick / 2]}>
+        <boxGeometry args={[seatD, 0.02, 0.02]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
+      {/* Bottom line where legs meet the floor */}
+      <mesh position={[0, 0.01, 0]}>
+        <boxGeometry args={[seatD + 0.1, 0.02, seatW + 0.1]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
     </group>
   );
 }
@@ -104,6 +114,11 @@ function Table({ position, rotateY = 0 }: { position: [number, number, number]; 
         <meshStandardMaterial color="#F5A623" />
         <Edges color="#111111" threshold={1} />
       </mesh>
+      {/* Bottom line where table legs meet the floor */}
+      <mesh position={[0, 0.01, 0]}>
+        <boxGeometry args={[topW + 0.1, 0.02, topD + 0.1]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
     </group>
   );
 }
@@ -117,6 +132,11 @@ function Plant({ position }: { position: [number, number, number] }) {
         <boxGeometry args={[0.9, 1.0, 0.9]} />
         <meshStandardMaterial color="#f0f0ec" />
         <Edges color="#1a1a1a" threshold={1} />
+      </mesh>
+      {/* Bottom line where pot meets the floor */}
+      <mesh position={[0, 0.01, 0]}>
+        <boxGeometry args={[1.0, 0.02, 1.0]} />
+        <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Soil surface */}
       <mesh position={[0, 1.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
