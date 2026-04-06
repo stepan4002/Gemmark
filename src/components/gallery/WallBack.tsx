@@ -32,19 +32,17 @@ export default function WallBack() {
         transform
         style={{ pointerEvents: 'none' }}
       >
-        <div style={{
+        <span style={{
           color: '#1a1a1a',
           fontSize: '22px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '2px',
           textTransform: 'uppercase',
-          textAlign: 'center',
-          maxWidth: '250px',
-          lineHeight: 1.3,
+          whiteSpace: 'nowrap',
         }}>
           {t.sections['preco-nazov-gemmark']}
-        </div>
+        </span>
       </Html>
 
       <WideFrame

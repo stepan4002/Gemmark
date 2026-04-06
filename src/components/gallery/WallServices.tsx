@@ -135,7 +135,7 @@ export default function WallServices() {
     <group>
       {/* Section label */}
       <Html
-        position={[DIVIDER_X - 2.0, WALL_HEIGHT * 0.88, FACE_Z]}
+        position={[DIVIDER_X, WALL_HEIGHT * 0.88, FACE_Z]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
