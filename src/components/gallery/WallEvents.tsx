@@ -26,7 +26,7 @@ export default function WallEvents() {
     <group>
       {/* Section label */}
       <Html
-        position={[FACE_X, WALL_HEIGHT * 0.82, CENTER_Z]}
+        position={[FACE_X, WALL_HEIGHT * 0.86, CENTER_Z]}
         rotation={FACE_ROT}
         transform
         style={{ pointerEvents: 'none' }}
