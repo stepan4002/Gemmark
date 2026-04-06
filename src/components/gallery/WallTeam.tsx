@@ -72,7 +72,7 @@ const ALL_MEMBERS: TeamMember[] = [
     roleHu: 'Projektkoordináció',
     descriptionSk: 'Diana Spišiaková – Šestnásťročná študentka Gymnázia P. J. Šafárika v Rožňave, ktorá v projekte zabezpečuje najmä:\nkomunikáciu s klientmi (remeselníci, podnikatelia, obce, organizácie),\nprijímanie a evidovanie nových projektov a zákaziek,\ndohodnutie zadania projektu (logo, web, fotografie, video, plagát a pod.),\nkoordináciu priebehu jednotlivých projektov,\nkomunikáciu medzi študentmi a klientom počas realizácie projektu.\n\nBez Diany, ktorá od svojich 15 rokov funguje ako dobrovoľníčka v GemArte, kde postupne zastávala zodpovedné úlohy pri organizovaní rôznych podujatí, komunikácii s účinkujúcimi, partnermi a návštevníkmi, by bolo veľmi náročné udržať v projekte poriadok, termíny a plynulý priebeh zákaziek.',
     descriptionHu: 'Diana Spišiaková felelős a projektek koordinációjáért a GemMARK keretein belül.\n\nGondoskodik a régióból érkező ügyfelek és a diákcsapatok közötti együttműködés zökkenőmentes lebonyolításáról. Felügyeli a határidőket, az eredmények minőségét és az összes érintett fél közötti kommunikációt.\n\nFeladata annak biztosítása, hogy minden projekt zökkenőmentesen menjen végbe — az ügyféllel való első találkozótól, a feladatmeghatározáson és megvalósításon át az eredmények átadásáig és a visszajelzésig.\n\nDiana projektmenedzsment és koordinációs tapasztalatot hoz a projektbe, ami kulcsfontosságú ahhoz, hogy a GemMARK megbízhatóan és professzionálisan működjön.',
-    image: '/images/services/strategy.jpg',
+    image: '/images/people/diana-spisiakova.png',
   },
   {
     id: 'nikolas-stepan',
