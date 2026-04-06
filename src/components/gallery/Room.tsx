@@ -57,13 +57,13 @@ export const HOW_WALL_LEFT_X = -7;
 export const HOW_WALL_RIGHT_X = -1;
 export const HOW_WALL_SEGMENT_W = 7;
 
-// ─── Wall B split into two half-segments ─────────────────────────────────────
-// Wall B LEFT half: "Ako to funguje?" (process)
+// ─── Wall B split into two segments ──────────────────────────────────────────
+// Wall B LEFT: "Ako to funguje?" (process) — kept same size
 export const WALL_B_LEFT_X = DIVIDER_X - DIVIDER_WIDTH / 4;   // = 6 - 2 = 4
-export const WALL_B_LEFT_W = DIVIDER_WIDTH / 2 - 0.3;         // = 4 - 0.3 = 3.7
-// Wall B RIGHT half: "Ako sa s nami spojíš?" (contact)
-export const WALL_B_RIGHT_X = DIVIDER_X + DIVIDER_WIDTH / 4;  // = 6 + 2 = 8
-export const WALL_B_RIGHT_W = DIVIDER_WIDTH / 2 - 0.3;        // = 3.7
+export const WALL_B_LEFT_W = DIVIDER_WIDTH / 2 - 0.3;         // = 3.7
+// Wall B RIGHT: "Ako sa s nami spojíš?" (contact) — WIDER, extends further left
+export const WALL_B_RIGHT_X = 0;   // centered in room (moved left from 8)
+export const WALL_B_RIGHT_W = 8;   // much wider (was 3.7)
 
 // ─── Connecting wall from Wall A left end, going FORWARD (toward entrance) ───
 // This wall carries "Čo, kedy a kde sa u nás deje?" content.
