@@ -78,6 +78,32 @@ function Table({ position, rotateY = 0 }: { position: [number, number, number]; 
           </mesh>
         ))
       )}
+
+      {/* Magazines / brochures on top of the table */}
+      {/* Magazine 1 — slightly rotated, dark navy */}
+      <mesh position={[-0.4, topH + 0.12, 0.3]} rotation={[0, 0.15, 0]}>
+        <boxGeometry args={[0.6, 0.04, 0.85]} />
+        <meshStandardMaterial color="#1B2432" />
+        <Edges color="#111111" threshold={1} />
+      </mesh>
+      {/* Magazine 2 — stacked on top, orange accent */}
+      <mesh position={[-0.3, topH + 0.16, 0.2]} rotation={[0, -0.2, 0]}>
+        <boxGeometry args={[0.55, 0.03, 0.8]} />
+        <meshStandardMaterial color="#D95B2B" />
+        <Edges color="#111111" threshold={1} />
+      </mesh>
+      {/* Magazine 3 — offset, gray */}
+      <mesh position={[0.5, topH + 0.12, -0.4]} rotation={[0, 0.35, 0]}>
+        <boxGeometry args={[0.5, 0.03, 0.7]} />
+        <meshStandardMaterial color="#9A9A8E" />
+        <Edges color="#111111" threshold={1} />
+      </mesh>
+      {/* Small brochure — yellow accent */}
+      <mesh position={[0.3, topH + 0.12, 0.6]} rotation={[0, -0.1, 0]}>
+        <boxGeometry args={[0.4, 0.02, 0.55]} />
+        <meshStandardMaterial color="#F5A623" />
+        <Edges color="#111111" threshold={1} />
+      </mesh>
     </group>
   );
 }
