@@ -41,7 +41,8 @@ export default function WideFrame({
 
   // Crop texture to fill frame without distortion (like CSS object-fit: cover)
   if (texture.image) {
-    const imgAspect = texture.image.width / texture.image.height;
+    const img = texture.image as HTMLImageElement;
+    const imgAspect = img.width / img.height;
     const frameAspect = size[0] / size[1];
     if (imgAspect > frameAspect) {
       // Image is wider — crop sides
