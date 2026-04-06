@@ -144,11 +144,11 @@ export default function Furniture() {
       {/* ── TABLE level with Wall C, rotated 90° so long side runs along X ── */}
       <Table position={[tableX, 0, tableZ]} rotateY={Math.PI / 2} />
 
-      {/* ── BENCH in front (+Z), rotated 90°, backrest faces entrance ── */}
-      <Bench position={[tableX, 0, tableZ + benchOffsetZ]} backrestSide={1} rotateY={Math.PI / 2} />
+      {/* ── BENCH in front (+Z), no extra rotation, backrest faces entrance ── */}
+      <Bench position={[tableX, 0, tableZ + benchOffsetZ]} backrestSide={1} />
 
-      {/* ── BENCH behind (-Z), rotated 90°, backrest faces back wall ── */}
-      <Bench position={[tableX, 0, tableZ - benchOffsetZ]} backrestSide={-1} rotateY={Math.PI / 2} />
+      {/* ── BENCH behind (-Z), no extra rotation, backrest faces back wall ── */}
+      <Bench position={[tableX, 0, tableZ - benchOffsetZ]} backrestSide={-1} />
 
       {/* ── PLANT in the back-left corner of the room ────────────────── */}
       <Plant position={[plantX, 0, plantZ]} />
