@@ -39,6 +39,21 @@ export default function WideFrame({
 
   const texture = useTexture(image || '/images/branding/gemmark-logo-new.png');
 
+  // Crop texture to fill frame without distortion (like CSS object-fit: cover)
+  if (texture.image) {
+    const imgAspect = texture.image.width / texture.image.height;
+    const frameAspect = size[0] / size[1];
+    if (imgAspect > frameAspect) {
+      // Image is wider — crop sides
+      texture.repeat.set(frameAspect / imgAspect, 1);
+      texture.offset.set((1 - frameAspect / imgAspect) / 2, 0);
+    } else {
+      // Image is taller — crop top/bottom
+      texture.repeat.set(1, imgAspect / frameAspect);
+      texture.offset.set(0, (1 - imgAspect / frameAspect) / 2);
+    }
+  }
+
   // Smooth lift upward on hover (positive Y)
   useFrame(() => {
     if (!meshRef.current) return;
