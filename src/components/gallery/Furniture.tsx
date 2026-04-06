@@ -130,7 +130,7 @@ function Plant({ position }: { position: [number, number, number] }) {
 export default function Furniture() {
   // Furniture centred in front of Wall C
   const centreX = 0;
-  const centreZ = 6;  // in front of Wall C (Z=3), toward entrance
+  const centreZ = 10;  // in front of Wall C (Z=3), moved further toward entrance to stay visible
 
   // Plant position: back-left corner of the room
   const plantX = -ROOM_W / 2 + 1.5;   // ≈ -8.5

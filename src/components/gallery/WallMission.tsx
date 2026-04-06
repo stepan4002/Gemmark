@@ -106,13 +106,12 @@ export default function WallMission() {
           <div style={{
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
             color: '#aaaaaa',
-            fontSize: '28px',
+            fontSize: '22px',
             fontWeight: '900',
             letterSpacing: '3px',
             textTransform: 'uppercase',
             textAlign: 'center',
-            maxWidth: '400px',
-            whiteSpace: 'nowrap',
+            maxWidth: '500px',
           }}>
             {t.sections['nasa-misia']}
           </div>

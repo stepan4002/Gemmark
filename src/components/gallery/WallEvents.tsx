@@ -33,14 +33,14 @@ export default function WallEvents() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '28px',
+          fontSize: '18px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
           lineHeight: 1.3,
-          maxWidth: '400px',
+          maxWidth: '180px',
         }}>
           {t.sections['co-kedy-kde']}
         </div>

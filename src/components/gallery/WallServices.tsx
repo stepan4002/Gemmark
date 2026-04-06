@@ -135,14 +135,14 @@ export default function WallServices() {
     <group>
       {/* Section label */}
       <Html
-        position={[DIVIDER_X, WALL_HEIGHT * 0.88, FACE_Z]}
+        position={[DIVIDER_X + 1.0, WALL_HEIGHT * 0.88, FACE_Z]}
         rotation={WALL_ROT}
         transform
         style={{ pointerEvents: 'none' }}
       >
         <span style={{
           color: '#222',
-          fontSize: '28px',
+          fontSize: '20px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',

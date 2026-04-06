@@ -32,13 +32,13 @@ export default function WallHowItWorks() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '28px',
+          fontSize: '18px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '400px',
+          maxWidth: '180px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-to-funguje']}
@@ -71,13 +71,13 @@ export default function WallHowItWorks() {
       >
         <div style={{
           color: '#1a1a1a',
-          fontSize: '28px',
+          fontSize: '18px',
           fontWeight: '900',
           fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
           letterSpacing: '1px',
           textTransform: 'uppercase',
           textAlign: 'center',
-          maxWidth: '400px',
+          maxWidth: '180px',
           lineHeight: 1.3,
         }}>
           {t.sections['ako-sa-spojis']}
