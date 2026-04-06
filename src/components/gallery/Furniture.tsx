@@ -127,7 +127,7 @@ function Plant({ position }: { position: [number, number, number] }) {
 // Plant in the back-left corner.
 export default function Furniture() {
   // Furniture to the right of Wall C, level with it
-  // Wall C is at X=0, Z=3. Table goes to the right at same Z level.
+  // Layout: bench — table — bench along the Z axis
   const tableX = 6;     // right of Wall C
   const tableZ = 3;     // same Z as Wall C
 
@@ -135,20 +135,20 @@ export default function Furniture() {
   const plantX = -ROOM_W / 2 + 1.5;   // ≈ -8.5
   const plantZ = -ROOM_D / 2 + 1.5;   // ≈ -28.5
 
-  // Benches offset along X (face each other across table along X axis)
+  // Benches offset along Z (bench — table — bench in a row along Z)
   // Backrests face OUTWARD (away from table)
-  const benchOffsetX = 3.2;
+  const benchOffsetZ = 3.5;
 
   return (
     <group>
       {/* ── TABLE level with Wall C, to the right ────────────────────── */}
       <Table position={[tableX, 0, tableZ]} />
 
-      {/* ── BENCH on the -X side (left of table, backrest faces left) ── */}
-      <Bench position={[tableX - benchOffsetX, 0, tableZ]} backrestSide={-1} />
+      {/* ── BENCH in front of table (+Z side, backrest faces +Z / entrance) ── */}
+      <Bench position={[tableX, 0, tableZ + benchOffsetZ]} backrestSide={1} />
 
-      {/* ── BENCH on the +X side (right of table, backrest faces right) ── */}
-      <Bench position={[tableX + benchOffsetX, 0, tableZ]} backrestSide={1} />
+      {/* ── BENCH behind table (-Z side, backrest faces -Z / back wall) ── */}
+      <Bench position={[tableX, 0, tableZ - benchOffsetZ]} backrestSide={-1} />
 
       {/* ── PLANT in the back-left corner of the room ────────────────── */}
       <Plant position={[plantX, 0, plantZ]} />

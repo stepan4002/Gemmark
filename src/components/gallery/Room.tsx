@@ -22,7 +22,7 @@ export const WALL_H = 7.5;
 // Wall A connects to the RIGHT wall and leaves a gap on the LEFT side.
 // Shortened to 8 units (from 14) since only 2 service frames are needed.
 export const WALL_A_Z = 16;          // Z position — moved FORWARD for more space
-export const WALL_B_Z = -14;         // Z position — pushed back so portfolio frame 10 is clear
+export const WALL_B_Z = -10;         // Z position — close to frame 10, forward enough to not obstruct floor mission at Z=-22
 export const DIVIDER_WIDTH = 12;     // wider to fit services properly
 export const DIVIDER_GAP = ROOM_W - DIVIDER_WIDTH; // = 8 — gap on left side
 // X centre: right edge at X=10, extends DIVIDER_WIDTH units left → left edge at X=-2, centre X=4
@@ -348,61 +348,62 @@ export default function Room() {
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
 
-      {/* ── VERTICAL CORNER LINES ─────────────────────────────────────────── */}
+      {/* ── VERTICAL CORNER LINES — thicker (0.12) for visibility ────────── */}
       {/* Back wall + left wall corner */}
       <mesh position={[-halfW, WALL_H / 2, -halfD]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Back wall + right wall corner (open but mark floor edge) */}
+      {/* Back wall + right boundary corner */}
       <mesh position={[halfW, WALL_H / 2, -halfD]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall A left end */}
       <mesh position={[DIVIDER_X - DIVIDER_WIDTH / 2, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall A right end (connects to right room wall) */}
+      {/* Wall A right end — INTERSECTION with right room boundary */}
       <mesh position={[DIVIDER_X + DIVIDER_WIDTH / 2, WALL_H / 2, WALL_A_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
+        <meshStandardMaterial color="#1a1a1a" />
+      </mesh>
+      {/* Wall A + connecting wall INTERSECTION corner */}
+      <mesh position={[CONNECT_WALL_A_X, WALL_H / 2, WALL_A_Z]}>
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall B LEFT half ends */}
       <mesh position={[WALL_B_LEFT_X - WALL_B_LEFT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_B_LEFT_X + WALL_B_LEFT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       {/* Wall B RIGHT half ends */}
       <mesh position={[WALL_B_RIGHT_X - WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_B_RIGHT_X + WALL_B_RIGHT_W / 2, WALL_H / 2, WALL_B_Z]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Wall C ends (top and bottom along Z since Wall C runs along Z axis) */}
+      {/* Wall C ends */}
       <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z - WALL_C_LENGTH / 2]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
       <mesh position={[WALL_C_X, WALL_H / 2, WALL_C_Z + WALL_C_LENGTH / 2]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
-      {/* Connecting wall ends (goes FORWARD from Wall A) */}
-      <mesh position={[CONNECT_WALL_A_X, WALL_H / 2, CONNECT_WALL_A_Z_START]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
-        <meshStandardMaterial color="#1a1a1a" />
-      </mesh>
+      {/* Connecting wall far end */}
       <mesh position={[CONNECT_WALL_A_X, WALL_H / 2, CONNECT_WALL_A_Z_START + CONNECT_WALL_A_LENGTH]}>
-        <boxGeometry args={[0.04, WALL_H, 0.04]} />
+        <boxGeometry args={[0.12, WALL_H, 0.12]} />
         <meshStandardMaterial color="#1a1a1a" />
       </mesh>
     </group>
